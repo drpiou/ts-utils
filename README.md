@@ -75,7 +75,7 @@ yarn add @drpiou/ts-utils
 
 Add the given items to the end of the source array.
 
-```typescript jsx
+```typescript
 import { append } from '@drpiou/ts-utils';
 
 const result = append(['a', 'b', 1], 'a', 'z', 2);
@@ -87,7 +87,7 @@ const result = append(['a', 'b', 1], 'a', 'z', 2);
 
 Break the source array into smaller arrays of a given size.
 
-```typescript jsx
+```typescript
 import { chunk } from '@drpiou/ts-utils';
 
 const result = chunk(['a', 'b', 1], 2);
@@ -99,7 +99,7 @@ const result = chunk(['a', 'b', 1], 2);
 
 Break the source array into smaller arrays.
 
-```typescript jsx
+```typescript
 import { chunkWhile } from '@drpiou/ts-utils';
 
 const result = chunkWhile(['a', 'b', 1], (item, index, chunk) => chunk.indexOf(item) > -1);
@@ -111,7 +111,7 @@ const result = chunkWhile(['a', 'b', 1], (item, index, chunk) => chunk.indexOf(i
 
 Clone the source array.
 
-```typescript jsx
+```typescript
 import { clone } from '@drpiou/ts-utils';
 
 const result = clone(['a', 'b', 1]);
@@ -125,7 +125,7 @@ Create a new collection instance.
 
 > Collection provides a wrapper for working with arrays of data.
 
-```typescript jsx
+```typescript
 import { collect } from '@drpiou/ts-utils';
 
 const result = collect(['a', 'b', 1]);
@@ -186,7 +186,7 @@ const result = collect(['a', 'b', 1]);
 
 Add the given items to the end of the source array.
 
-```typescript jsx
+```typescript
 import { concatUniq } from '@drpiou/ts-utils';
 
 const result = concatUniq(['a', 'b', 1], ['a', 'z'], [2]);
@@ -198,7 +198,7 @@ const result = concatUniq(['a', 'b', 1], ['a', 'z'], [2]);
 
 Return whether the given item exists in the source array.
 
-```typescript jsx
+```typescript
 import { contains } from '@drpiou/ts-utils';
 
 const result = contains(['a', 'b', 1], (value) => value === 'b');
@@ -210,7 +210,7 @@ const result = contains(['a', 'b', 1], (value) => value === 'b');
 
 Debug provides a wrapper around log utilities.
 
-```typescript jsx
+```typescript
 import { Debug } from '@drpiou/ts-utils';
 
 const debug = new Debug({
@@ -229,7 +229,7 @@ const debug = new Debug({
 
 Return items number-indexed property [index, value] pairs of the source array.
 
-```typescript jsx
+```typescript
 import { entries } from '@drpiou/ts-utils';
 
 const result = entries(['a', 'b', 1]);
@@ -241,7 +241,7 @@ const result = entries(['a', 'b', 1]);
 
 Verify that all items pass a given truth test in the source array.
 
-```typescript jsx
+```typescript
 import { every } from '@drpiou/ts-utils';
 
 const result = every(['a', 'b', 1], (value) => typeof value === 'string');
@@ -253,7 +253,7 @@ const result = every(['a', 'b', 1], (value) => typeof value === 'string');
 
 Filter the items that pass a given truth test in the source array.
 
-```typescript jsx
+```typescript
 import { filter } from '@drpiou/ts-utils';
 
 const result = filter(['a', 'b', 1, null], (value) => typeof value !== 'number');
@@ -265,7 +265,7 @@ const result = filter(['a', 'b', 1, null], (value) => typeof value !== 'number')
 
 Return the first item that passes a given truth test in the source array.
 
-```typescript jsx
+```typescript
 import { first } from '@drpiou/ts-utils';
 
 const result = first(['a', 'b', 1]);
@@ -277,7 +277,7 @@ const result = first(['a', 'b', 1]);
 
 Flatten the source array.
 
-```typescript jsx
+```typescript
 import { flatten } from '@drpiou/ts-utils';
 
 const result = flatten(['a', 'b', [1], [['c', 2]]]);
@@ -289,7 +289,7 @@ const result = flatten(['a', 'b', [1], [['c', 2]]]);
 
 Invert the order of the items in the source array.
 
-```typescript jsx
+```typescript
 import { invert } from '@drpiou/ts-utils';
 
 const result = invert(['a', 'b', 1]);
@@ -301,7 +301,7 @@ const result = invert(['a', 'b', 1]);
 
 Join items in a source array.
 
-```typescript jsx
+```typescript
 import { join } from '@drpiou/ts-utils';
 
 const result = join(['a', 'b', 1], '-');
@@ -313,7 +313,7 @@ const result = join(['a', 'b', 1], '-');
 
 Join key-paired items in a source array.
 
-```typescript jsx
+```typescript
 import { joinBy } from '@drpiou/ts-utils';
 
 const result = joinBy([{ a: 'a' }, { a: 'b' }, { a: 1 }], '-');
@@ -325,7 +325,7 @@ const result = joinBy([{ a: 'a' }, { a: 'b' }, { a: 1 }], '-');
 
 Return the key-paired items of the source array.
 
-```typescript jsx
+```typescript
 import { keyBy } from '@drpiou/ts-utils';
 
 const result = keyBy([{ a: 'a' }, { a: 'b' }, { a: 1 }], 'a');
@@ -337,7 +337,7 @@ const result = keyBy([{ a: 'a' }, { a: 'b' }, { a: 1 }], 'a');
 
 Return the indexes of the source array.
 
-```typescript jsx
+```typescript
 import { keys } from '@drpiou/ts-utils';
 
 const result = keys(['a', 'b', 1]);
@@ -349,7 +349,7 @@ const result = keys(['a', 'b', 1]);
 
 Return the last item that passes a given truth test in the source array.
 
-```typescript jsx
+```typescript
 import { last } from '@drpiou/ts-utils';
 
 const result = last(['a', 'b', 1]);
@@ -361,7 +361,7 @@ const result = last(['a', 'b', 1]);
 
 Log in the console the params.
 
-```typescript jsx
+```typescript
 import { log } from '@drpiou/ts-utils';
 
 log('message', ['a', 'b', 1]);
@@ -371,7 +371,7 @@ log('message', ['a', 'b', 1]);
 
 Log error in the console the params.
 
-```typescript jsx
+```typescript
 import { logError } from '@drpiou/ts-utils';
 
 logError('message', ['a', 'b', 1]);
@@ -381,7 +381,7 @@ logError('message', ['a', 'b', 1]);
 
 Log info in the console the params.
 
-```typescript jsx
+```typescript
 import { logInfo } from '@drpiou/ts-utils';
 
 logInfo('message', ['a', 'b', 1]);
@@ -391,7 +391,7 @@ logInfo('message', ['a', 'b', 1]);
 
 Log warn in the console the params.
 
-```typescript jsx
+```typescript
 import { logWarn } from '@drpiou/ts-utils';
 
 logWarn('message', ['a', 'b', 1]);
@@ -401,7 +401,7 @@ logWarn('message', ['a', 'b', 1]);
 
 Return the maximum value of the items in the source array.
 
-```typescript jsx
+```typescript
 import { max } from '@drpiou/ts-utils';
 
 const result = max(['a', 'b', 1, 2]);
@@ -413,7 +413,7 @@ const result = max(['a', 'b', 1, 2]);
 
 Return the minimum value of the items in the source array.
 
-```typescript jsx
+```typescript
 import { min } from '@drpiou/ts-utils';
 
 const result = min(['a', 'b', 1, 2]);
@@ -425,7 +425,7 @@ const result = min(['a', 'b', 1, 2]);
 
 Order items in the source array.
 
-```typescript jsx
+```typescript
 import { order } from '@drpiou/ts-utils';
 
 const result = order(['b', 1, 'a', 3, 2]);
@@ -437,7 +437,7 @@ const result = order(['b', 1, 'a', 3, 2]);
 
 Order key-paired items in the source array.
 
-```typescript jsx
+```typescript
 import { orderBy } from '@drpiou/ts-utils';
 
 const result = orderBy([{ a: 'b' }, { a: 1 }, { a: 'a' }, { a: 3 }, { a: 2 }]);
@@ -449,7 +449,7 @@ const result = orderBy([{ a: 'b' }, { a: 1 }, { a: 'a' }, { a: 3 }, { a: 2 }]);
 
 Fill the given value until the source array reaches the specified size.
 
-```typescript jsx
+```typescript
 import { pad } from '@drpiou/ts-utils';
 
 const result = pad(['a', 'b', 1], 6, 0);
@@ -461,7 +461,7 @@ const result = pad(['a', 'b', 1], 6, 0);
 
 Separate items that pass a given truth test in the source array.
 
-```typescript jsx
+```typescript
 import { partition } from '@drpiou/ts-utils';
 
 const result = partition(['a', 'b', 1], (value) => value === 'b');
@@ -473,7 +473,7 @@ const result = partition(['a', 'b', 1], (value) => value === 'b');
 
 Return all the paths in dot notation of the source object.
 
-```typescript jsx
+```typescript
 import { paths } from '@drpiou/ts-utils';
 
 const result = paths({ a: 1, b: { c: 2 } });
@@ -485,7 +485,7 @@ const result = paths({ a: 1, b: { c: 2 } });
 
 Add the given items to the beginning of the source array.
 
-```typescript jsx
+```typescript
 import { prepend } from '@drpiou/ts-utils';
 
 const result = prepend(['a', 'b', 1], 'a', 'z', 2);
@@ -499,7 +499,7 @@ Add the given items to the end of the source array.
 
 > This function mutates the source array.
 
-```typescript jsx
+```typescript
 import { pushUniq } from '@drpiou/ts-utils';
 
 const result = pushUniq(['a', 'b', 1], 'a', 'z', 2);
@@ -511,7 +511,7 @@ const result = pushUniq(['a', 'b', 1], 'a', 'z', 2);
 
 Return random items from the source array.
 
-```typescript jsx
+```typescript
 import { random } from '@drpiou/ts-utils';
 
 const result = random(['a', 'b', 1]);
@@ -523,7 +523,7 @@ const result = random(['a', 'b', 1]);
 
 Await x seconds.
 
-```typescript jsx
+```typescript
 import { sleep } from '@drpiou/ts-utils';
 
 await sleep(1);
@@ -535,7 +535,7 @@ Sort items in the source array.
 
 > This function mutates the source array.
 
-```typescript jsx
+```typescript
 import { sort } from '@drpiou/ts-utils';
 
 const result = sort(['b', 1, 'a', 3, 2]);
@@ -549,7 +549,7 @@ Sort key-paired items in the source array.
 
 > This function mutates the source array.
 
-```typescript jsx
+```typescript
 import { sortBy } from '@drpiou/ts-utils';
 
 const result = sortBy([{ a: 'b' }, { a: 1 }, { a: 'a' }, { a: 3 }, { a: 2 }]);
@@ -561,7 +561,7 @@ const result = sortBy([{ a: 'b' }, { a: 1 }, { a: 'a' }, { a: 3 }, { a: 2 }]);
 
 Return the sum of the items in the source array.
 
-```typescript jsx
+```typescript
 import { sum } from '@drpiou/ts-utils';
 
 const result = sum(['a', 'b', 1, 2]);
@@ -573,7 +573,7 @@ const result = sum(['a', 'b', 1, 2]);
 
 Return the specified number of items in the source array.
 
-```typescript jsx
+```typescript
 import { take } from '@drpiou/ts-utils';
 
 const result = take(['a', 'b', 1]);
@@ -585,7 +585,7 @@ const result = take(['a', 'b', 1]);
 
 Return all the unique items in the source array.
 
-```typescript jsx
+```typescript
 import { uniq } from '@drpiou/ts-utils';
 
 const result = uniq(['a', 'b', 'a', 1]);
@@ -597,7 +597,7 @@ const result = uniq(['a', 'b', 'a', 1]);
 
 Return all the unique key-paired items in the source array.
 
-```typescript jsx
+```typescript
 import { uniqBy } from '@drpiou/ts-utils';
 
 const result = uniqBy([{ a: 'a' }, { a: 'b' }, { a: 'a' }, { a: 1 }]);
@@ -609,7 +609,7 @@ const result = uniqBy([{ a: 'a' }, { a: 'b' }, { a: 'a' }, { a: 1 }]);
 
 Await x milliseconds.
 
-```typescript jsx
+```typescript
 import { usleep } from '@drpiou/ts-utils';
 
 await usleep(100);
@@ -619,7 +619,7 @@ await usleep(100);
 
 Removes the keys of the source object.
 
-```typescript jsx
+```typescript
 import { withoutProperties } from '@drpiou/ts-utils';
 
 const result = withoutProperties({ a: 1, b: 2 }, ['b']);
