@@ -9,7 +9,7 @@ import { Path } from '../types/generic';
  * @returns Array
  */
 const paths = <S extends object>(source: S, parent = ''): Path<S>[] => {
-  let result: string[] = [];
+  const result: string[] = [];
 
   const sourceEntries = Object.entries(source);
 
@@ -25,8 +25,8 @@ const paths = <S extends object>(source: S, parent = ''): Path<S>[] => {
 
     result.push(path);
 
-    if (typeof value === 'object' && isPlainObject(value)) {
-      result = result.concat(paths(value as unknown as object, path));
+    if (value && isPlainObject(value)) {
+      result.push(...paths(value as unknown as object, path));
     }
 
     i++;

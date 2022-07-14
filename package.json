@@ -1,6 +1,6 @@
 {
   "name": "@drpiou/ts-utils",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Provides some JavaScript utilities.",
   "keywords": [],
   "author": "Alex <hello@drpiou.dev>",
@@ -28,7 +28,6 @@
     "build": "rollup -c",
     "watch": "rollup -cw",
     "prepare": "yarn build && yarn test",
-    "publish": "npm publish --access public",
     "toc": "gh-md-toc --insert",
     "test": "npx jest __tests__"
   },
