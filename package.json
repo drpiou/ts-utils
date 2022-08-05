@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/ts-utils.umd.cjs",
   "module": "./dist/ts-utils.js",
   "exports": {
