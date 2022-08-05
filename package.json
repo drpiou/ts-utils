@@ -1,7 +1,21 @@
 {
-  "name": "ts-utils",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@drpiou/ts-utils",
+  "version": "0.0.4",
+  "description": "Provides some JavaScript utilities.",
+  "keywords": [],
+  "author": "Alex <hello@drpiou.dev>",
+  "homepage": "https://github.com/drpiou/ts-utils#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drpiou/ts-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/drpiou/ts-utils/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "files": [
     "dist"
@@ -18,7 +32,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "toc": "gh-md-toc --insert"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
