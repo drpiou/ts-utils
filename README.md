@@ -2,8 +2,7 @@
 
 ![Licence](https://img.shields.io/github/license/drpiou/ts-utils)
 ![Package.json version](https://img.shields.io/github/package-json/v/drpiou/ts-utils)
-![Jest tests](https://img.shields.io/badge/passed%20test-75-green)
-![Jest tests](https://img.shields.io/badge/stage-experimental-important)
+![Stage](https://img.shields.io/badge/stage-experimental-important)
 
 The `@drpiou/ts-utils` package provides some JavaScript utilities.
 

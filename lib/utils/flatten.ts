@@ -7,7 +7,7 @@
  * @param deep Flatten recursively.
  * @returns Array
  */
-const flatten = <I>(source: any[], deep?: boolean): I[] => {
+const flatten = <I>(source: unknown[], deep?: boolean): I[] => {
   const result: I[] = [];
 
   const c = source.length;

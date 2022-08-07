@@ -17,11 +17,9 @@ const min = <S>(source: S[], key?: keyof S): number => {
   while (i < c) {
     const item = source[i];
 
-    const value: any = key && isPlainObject(item) ? item[key] : item;
+    const value = Number(key && isPlainObject(item) ? item[key] : item);
 
-    const isNumber = value === 0 || value > 0 || value < 0;
-
-    if (isNumber) {
+    if (!isNaN(value)) {
       if (result === null) {
         result = value;
       }
@@ -32,7 +30,7 @@ const min = <S>(source: S[], key?: keyof S): number => {
     i++;
   }
 
-  return (result || 0) as number;
+  return result || 0;
 };
 
 export default min;

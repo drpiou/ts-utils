@@ -1,18 +1,76 @@
-import './style.css'
-import {append} from "../lib";
+import './style.css';
+import append from './tests/append';
+import chunk from './tests/chunk';
+import chunkWhile from './tests/chunkWhile';
+import clone from './tests/clone';
+import collect from './tests/collect';
+import concatUniq from './tests/concatUniq';
+import contains from './tests/contains';
+import entries from './tests/entries';
+import every from './tests/every';
+import filter from './tests/filter';
+import first from './tests/first';
+import flatten from './tests/flatten';
+import invert from './tests/invert';
+import join from './tests/join';
+import joinBy from './tests/joinBy';
+import keyBy from './tests/keyBy';
+import keys from './tests/keys';
+import last from './tests/last';
+import max from './tests/max';
+import min from './tests/min';
+import order from './tests/order';
+import orderBy from './tests/orderBy';
+import pad from './tests/pad';
+import partition from './tests/partition';
+import paths from './tests/paths';
+import prepend from './tests/prepend';
+import pushUniq from './tests/pushUniq';
+import random from './tests/random';
+import sleep from './tests/sleep';
+import sort from './tests/sort';
+import sortBy from './tests/sortBy';
+import take from './tests/take';
+import uniqBy from './tests/uniqBy';
+import usleep from './tests/usleep';
+import withoutProperties from './tests/withoutProperties';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <div class="card">
-      <span id="counter">test...</span>
-    </div>
-  </div>
-`
+const app = document.querySelector<HTMLDivElement>('#app');
 
-const element = document.querySelector<HTMLButtonElement>('#counter')!;
-
-const source = ['a', 'b', 1];
-
-const result = append(source, 'a', 'z', 2 as any);
-
-element.innerHTML = `count is ${JSON.stringify(result)}`
+if (app) {
+  append(app);
+  chunk(app);
+  chunkWhile(app);
+  clone(app);
+  collect(app);
+  concatUniq(app);
+  contains(app);
+  entries(app);
+  every(app);
+  filter(app);
+  first(app);
+  flatten(app);
+  invert(app);
+  join(app);
+  joinBy(app);
+  keyBy(app);
+  keys(app);
+  last(app);
+  max(app);
+  min(app);
+  order(app);
+  orderBy(app);
+  pad(app);
+  partition(app);
+  paths(app);
+  prepend(app);
+  pushUniq(app);
+  random(app);
+  sleep(app);
+  sort(app);
+  sortBy(app);
+  take(app);
+  uniqBy(app);
+  usleep(app);
+  withoutProperties(app);
+}

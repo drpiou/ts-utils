@@ -32,7 +32,7 @@ module.exports = {
       version: 'detect',
     },
   },
-  ignorePatterns: ['lib/**/*'],
+  ignorePatterns: ['dist/**/*'],
   overrides: [
     {
       files: [
@@ -57,10 +57,6 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': ['error'],
         '@typescript-eslint/no-invalid-void-type': ['warn'],
         '@typescript-eslint/no-shadow': ['error'],
-        '@typescript-eslint/no-unsafe-argument': ['off'], // I don't know why some exported packages trigger this rule
-        '@typescript-eslint/no-unsafe-assignment': ['off'], // I don't know why some exported packages trigger this rule
-        '@typescript-eslint/no-unsafe-call': ['off'], // I don't know why some exported packages trigger this rule
-        '@typescript-eslint/no-unsafe-member-access': ['off'], // I don't know why some exported packages trigger this rule
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_.*_$', varsIgnorePattern: '^_.*_$' }],
       },
     },

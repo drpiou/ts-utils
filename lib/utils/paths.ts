@@ -19,14 +19,14 @@ const paths = <S extends object>(source: S, parent = ''): Path<S>[] => {
 
   while (i < c) {
     const key = sourceEntries[i][0];
-    const value = sourceEntries[i][1];
+    const value: unknown = sourceEntries[i][1];
 
     const path = parent ? [parent, key].join('.') : key;
 
     result.push(path);
 
     if (value && isPlainObject(value)) {
-      result.push(...paths(value as unknown as object, path));
+      result.push(...paths(value as object, path));
     }
 
     i++;

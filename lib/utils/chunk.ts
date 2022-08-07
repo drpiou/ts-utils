@@ -10,7 +10,7 @@ import chunkWhile from './chunkWhile';
  * @returns Array
  */
 const chunk = <I>(source: I[], size: number): I[][] => {
-  return chunkWhile(source, (_item, _index, chunk) => chunk.length === size);
+  return chunkWhile(source, (_item, _index, _chunk) => _chunk.length === size);
 };
 
 export default chunk;
