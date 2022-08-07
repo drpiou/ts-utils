@@ -17,10 +17,14 @@ const max = <S>(source: S[], key?: keyof S): number => {
   while (i < c) {
     const item = source[i];
 
-    const value = Number(key && isPlainObject(item) ? item[key] : item);
+    const value = key && isPlainObject(item) ? item[key] : item;
 
-    if (!isNaN(value)) {
-      result = value > result ? value : result;
+    if (value !== null && value !== undefined) {
+      const number = Number(value);
+
+      if (!isNaN(number)) {
+        result = number > result ? number : result;
+      }
     }
 
     i++;

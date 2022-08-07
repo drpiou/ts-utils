@@ -17,14 +17,18 @@ const min = <S>(source: S[], key?: keyof S): number => {
   while (i < c) {
     const item = source[i];
 
-    const value = Number(key && isPlainObject(item) ? item[key] : item);
+    const value = key && isPlainObject(item) ? item[key] : item;
 
-    if (!isNaN(value)) {
-      if (result === null) {
-        result = value;
+    if (value !== null && value !== undefined) {
+      const number = Number(value);
+
+      if (!isNaN(number)) {
+        if (result === null) {
+          result = number;
+        }
+
+        result = number < result ? number : result;
       }
-
-      result = value < result ? value : result;
     }
 
     i++;
