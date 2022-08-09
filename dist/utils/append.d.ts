@@ -10,5 +10,5 @@
  * @param items Items to add.
  * @returns Array
  */
-declare const append: <S, I>(source: S[], ...items: I[]) => (S | I)[];
+declare const append: <S>(source: S[], ...items: S[]) => S[];
 export default append;

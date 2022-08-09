@@ -58,6 +58,14 @@ h1 {
 
 .card {
   padding: 2em;
+  border: 1px solid #646cff;
+}
+
+.result.success {
+  color: #646cff;
+}
+.result.error {
+  color: orange;
 }
 
 .read-the-docs {

@@ -1,8 +1,7 @@
 'use strict';
 
 import { concatUniq } from '../../lib';
-import { test } from './test';
-import { testThis } from './testThis';
+import { test, testThis } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'concatUniq', () => {
@@ -10,7 +9,7 @@ export default (app: HTMLDivElement): void => {
 
     const result = concatUniq(source, ['a', 'z'], [2]);
 
-    testThis(source, ['a', 'b', 1]);
-    testThis(result, ['a', 'b', 1, 'z', 2]);
+    testThis({ source, expect: ['a', 'b', 1] });
+    testThis({ result, expect: ['a', 'b', 1, 'z', 2] });
   });
 };

@@ -1,8 +1,7 @@
 'use strict';
 
 import { filter } from '../../lib';
-import { test } from './test';
-import { testThis } from './testThis';
+import { test, testThis } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'filter', () => {
@@ -11,8 +10,8 @@ export default (app: HTMLDivElement): void => {
     const resultA = filter(source);
     const resultB = filter(source, (value) => typeof value !== 'number');
 
-    testThis(source, ['a', 'b', 1, null]);
-    testThis(resultA, ['a', 'b', 1]);
-    testThis(resultB, ['a', 'b', null]);
+    testThis({ source, expect: ['a', 'b', 1, null] });
+    testThis({ resultA, expect: ['a', 'b', 1] });
+    testThis({ resultB, expect: ['a', 'b', null] });
   });
 };

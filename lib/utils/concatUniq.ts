@@ -10,7 +10,7 @@ import pushUniq from './pushUniq';
  * @param items Items to add.
  * @returns Collection
  */
-const concatUniq = <S, I>(source: S[], ...items: I[][]): (S | I)[] => {
+const concatUniq = <S>(source: S[], ...items: S[][]): S[] => {
   const result = clone(source);
 
   const c = Number(items.length);

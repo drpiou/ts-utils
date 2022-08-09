@@ -10,5 +10,5 @@
  * @param items Items to add.
  * @returns Array
  */
-declare const prepend: <S, I>(source: S[], ...items: I[]) => (S | I)[];
+declare const prepend: <S>(source: S[], ...items: S[]) => S[];
 export default prepend;

@@ -1,8 +1,7 @@
 'use strict';
 
 import { sort } from '../../lib';
-import { test } from './test';
-import { testThis } from './testThis';
+import { test, testThis } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'sort', () => {
@@ -11,8 +10,8 @@ export default (app: HTMLDivElement): void => {
     const resultA = sort(source);
     const resultB = sort(source, true);
 
-    testThis(source, ['b', 'a', 3, 2, 1]);
-    testThis(resultA, ['b', 'a', 3, 2, 1]);
-    testThis(resultB, ['b', 'a', 3, 2, 1]);
+    testThis({ source, expect: ['b', 'a', 3, 2, 1] });
+    testThis({ resultA, expect: ['b', 'a', 3, 2, 1] });
+    testThis({ resultB, expect: ['b', 'a', 3, 2, 1] });
   });
 };

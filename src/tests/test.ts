@@ -1,3 +1,6 @@
+import { head, isPlainObject, omit, values } from 'lodash';
+import { log, logError, logInfo } from '../../lib';
+
 export const test = async (app: HTMLDivElement, title: string, callback: () => void | Promise<void>): Promise<void> => {
   const card = document.createElement('div');
 
@@ -10,16 +13,56 @@ export const test = async (app: HTMLDivElement, title: string, callback: () => v
   const result = document.createElement('p');
 
   result.className = 'result';
-  result.innerHTML = `${title} in test`;
+  result.innerHTML = `${title}<br>in test`;
 
   card.appendChild(result);
 
   try {
+    logInfo(`testing: ${title}`);
+
     // Run test
     await callback();
 
-    result.innerHTML = `${title} success`;
+    result.classList.add('success');
+    result.innerHTML = `${title}<br>success`;
   } catch (e) {
-    result.innerHTML = `${title} error: ${e instanceof Error ? e.message : 'unknown'}`;
+    result.classList.add('error');
+    result.innerHTML = `${title}<br>error: ${e instanceof Error ? e.message : 'unknown'}`;
+  }
+};
+
+export const testThis = (that: { [key: string]: unknown; expect: unknown }): void => {
+  const value = head(values(omit(that, ['expect'])));
+
+  log(that);
+
+  testValue(value, that.expect);
+};
+
+const testValue = (value: unknown, expectedValue: unknown): void => {
+  expect(typeof value, typeof expectedValue);
+
+  if (Array.isArray(value) && Array.isArray(expectedValue)) {
+    expect(value.length, expectedValue.length);
+
+    expectedValue.map((expectedValueAtIndex, index) => {
+      testValue(value[index], expectedValueAtIndex);
+    });
+  } else if (isPlainObject(value) && isPlainObject(expectedValue)) {
+    Object.keys(expectedValue as object).map((expectedValueKeysAtIndex) => {
+      testValue((value as never)[expectedValueKeysAtIndex], (expectedValue as never)[expectedValueKeysAtIndex]);
+    });
+  } else {
+    expect(value, expectedValue);
+  }
+};
+
+const expect = (value: unknown, expectedValue: unknown): void => {
+  if (value !== expectedValue) {
+    const message = `expect: ${String(expectedValue)}; got: ${String(value)}`;
+
+    logError(message);
+
+    throw new Error(message);
   }
 };

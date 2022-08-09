@@ -7,8 +7,8 @@
  * @param items Items to add.
  * @returns Collection
  */
-const pushUniq = <S, I>(source: S[], ...items: I[]): (S | I)[] => {
-  const result: (S | I)[] = source;
+const pushUniq = <S>(source: S[], ...items: S[]): S[] => {
+  const result = source;
 
   const c = Number(items.length);
 

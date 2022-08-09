@@ -1,8 +1,7 @@
 'use strict';
 
 import { prepend } from '../../lib';
-import { test } from './test';
-import { testThis } from './testThis';
+import { test, testThis } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'prepend', () => {
@@ -10,7 +9,7 @@ export default (app: HTMLDivElement): void => {
 
     const result = prepend(source, 'a', 'z', 2);
 
-    testThis(source, ['a', 'b', 1]);
-    testThis(result, ['a', 'z', 2, 'a', 'b', 1]);
+    testThis({ source, expect: ['a', 'b', 1] });
+    testThis({ result, expect: ['a', 'z', 2, 'a', 'b', 1] });
   });
 };

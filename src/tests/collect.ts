@@ -1,378 +1,548 @@
 'use strict';
 
-import { Collection, isCollection } from '../../lib';
-import { expect } from './expect';
-import { test } from './test';
-import { testThis } from './testThis';
+import { collect, isCollection } from '../../lib';
+import { test, testThis } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'collect', () => {
-    const source = ['a', 'b', 1];
-    const sourceObject = [{ a: 'a' }, { a: 'b' }, { a: 1 }, { a: 2 }];
+    const sourceString = ['a', 'b'];
+    const sourceNumber = [1, 2];
+    const sourceObjectString = [{ a: 'a' }, { a: 'b' }];
+    const sourceObjectNumber = [{ a: 1 }, { a: 2 }];
 
-    let result = new Collection(source);
-    let resultObject = new Collection(sourceObject);
+    const collectionString = collect(sourceString);
+    const collectionNumber = collect(sourceNumber);
+    const collectionObjectString = collect(sourceObjectString);
+    const collectionObjectNumber = collect(sourceObjectNumber);
+
+    testThis({ collect: typeof collectionString, expect: 'object' });
+    testThis({ isCollection: isCollection(collectionString), expect: true });
 
-    expect(typeof result, 'object');
-    expect(result instanceof Collection, true);
-    expect(isCollection(result), true);
+    void test(app, 'collect:all', () => {
+      const collectionTest = collectionString.clone();
+      const allA = collectionTest.all();
 
-    const allA = result.all();
-
-    testThis(result.all(), ['a', 'b', 1]);
-    testThis(allA, ['a', 'b', 1]);
-
-    const appendA = result.append(2).all();
-
-    testThis(result.all(), ['a', 'b', 1]);
-    testThis(appendA, ['a', 'b', 1, 2]);
-
-    const atA = result.at(0);
-
-    testThis(result.all(), ['a', 'b', 1]);
-    testThis(atA, 'a');
-
-    const chunkA = result.chunk(2).allDeep();
-
-    testThis(result.all(), ['a', 'b', 1]);
-    testThis(chunkA, [['a', 'b'], [1]]);
-
-    const sliceA = result.splice(2, 0, 'a').all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1]);
-    testThis(sliceA, ['a', 'b', 'a', 1]);
-
-    const containsA = result.contains((value) => value === 'b');
-
-    testThis(result.all(), ['a', 'b', 'a', 1]);
-    testThis(containsA, true);
-
-    const chunkWhileA = result.chunkWhile((item, _index, chunk) => chunk.contains((value) => value === item)).allDeep();
-
-    testThis(result.all(), ['a', 'b', 'a', 1]);
-    testThis(chunkWhileA, [
-      ['a', 'b'],
-      ['a', 1],
-    ]);
-
-    const cloneA = result.clone().all();
-
-    result.push(2);
-    cloneA.push(3);
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2]);
-    testThis(cloneA, ['a', 'b', 'a', 1, 3]);
-
-    const concatA = result.concat(['z', 3], [4]).all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2]);
-    testThis(concatA, ['a', 'b', 'a', 1, 2, 'z', 3, 4]);
-
-    const concatUniqA = result.concatUniq(['a', 'z', 3], [4]).all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2]);
-    testThis(concatUniqA, ['a', 'b', 'a', 1, 2, 'z', 3, 4]);
-
-    const countA = result.count();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2]);
-    testThis(countA, 5);
-
-    const eachA = result.each(() => 3).all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2]);
-    testThis(eachA, ['a', 'b', 'a', 1, 2]);
-
-    const entriesA = result.entries();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2]);
-    testThis(entriesA, [
-      [0, 'a'],
-      [1, 'b'],
-      [2, 'a'],
-      [3, 1],
-      [4, 2],
-    ]);
-
-    const everyA = result.every((value) => typeof value === 'string');
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2]);
-    testThis(everyA, false);
-
-    const pushA = result.push(null).all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(pushA, ['a', 'b', 'a', 1, 2, null]);
-
-    const pushUniqA = result.pushUniq(null).all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(pushUniqA, ['a', 'b', 'a', 1, 2, null]);
-
-    const filterA = result.filter().all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(filterA, ['a', 'b', 'a', 1, 2]);
-
-    const filterB = result.filter((value) => typeof value !== 'number').all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(filterB, ['a', 'b', 'a', null]);
-
-    const firstA = result.first();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(firstA, 'a');
-
-    const firstB = result.first((value) => typeof value === 'number');
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(firstB, 1);
-
-    const flattenA = result
-      .append([3, 4], [['c', 5], 6])
-      .flatten()
-      .all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(flattenA, ['a', 'b', 'a', 1, 2, null, 3, 4, ['c', 5], 6]);
-
-    const flattenB = result
-      .append([3, 4], [['c', 5], 6])
-      .flatten(true)
-      .all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(flattenB, ['a', 'b', 'a', 1, 2, null, 3, 4, 'c', 5, 6]);
-
-    const invertA = result.invert().all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(invertA, [null, 2, 1, 'a', 'b', 'a']);
-
-    const joinA = result.join();
-    const joinB = result.join('$');
-    const joinC = result.join('_', { first: '-' });
-    const joinD = result.join('!', { last: '?' });
-    const joinE = result.join('.', { first: ':', last: ';' });
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(joinA, 'aba12null');
-    testThis(joinB, 'a$b$a$1$2$null');
-    testThis(joinC, 'a-b_a_1_2_null');
-    testThis(joinD, 'a!b!a!1!2?null');
-    testThis(joinE, 'a:b.a.1.2;null');
-
-    const joinF = resultObject.joinBy('a');
-    const joinG = resultObject.joinBy('a', '$');
-    const joinH = resultObject.joinBy('a', '_', { first: '-' });
-    const joinI = resultObject.joinBy('a', '!', { last: '?' });
-    const joinJ = resultObject.joinBy('a', '.', { first: ':', last: ';' });
-
-    testThis(resultObject.all(), [{ a: 'a' }, { a: 'b' }, { a: 1 }, { a: 2 }]);
-    testThis(joinF, 'ab12');
-    testThis(joinG, 'a$b$1$2');
-    testThis(joinH, 'a-b_1_2');
-    testThis(joinI, 'a!b!1?2');
-    testThis(joinJ, 'a:b.1;2');
-
-    const keyByA = resultObject.keyBy('a');
-
-    testThis(resultObject.all(), [{ a: 'a' }, { a: 'b' }, { a: 1 }, { a: 2 }]);
-    testThis(keyByA, { a: { a: 'a' }, b: { a: 'b' }, 1: { a: 1 }, 2: { a: 2 } });
-
-    const keysA = result.keys();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(keysA, [0, 1, 2, 3, 4, 5]);
-
-    const lastA = result.last();
-    const lastB = result.last((value) => typeof value === 'number');
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(lastA, null);
-    testThis(lastB, 2);
-
-    const mapA = result.map(() => 3).all();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(mapA, [3, 3, 3, 3, 3, 3]);
-
-    const maxA = result.max();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(maxA, 2);
-
-    const maxB = resultObject.max('a');
-
-    testThis(resultObject.all(), [{ a: 'a' }, { a: 'b' }, { a: 1 }, { a: 2 }]);
-    testThis(maxB, 2);
-
-    const minA = result.min();
-
-    testThis(result.all(), ['a', 'b', 'a', 1, 2, null]);
-    testThis(minA, 1);
-
-    const minB = resultObject.min('a');
-
-    testThis(resultObject.all(), [{ a: 'a' }, { a: 'b' }, { a: 1 }, { a: 2 }]);
-    testThis(minB, 1);
-
-    result = new Collection(['a', 'b', 'a', 2]);
-
-    const unshiftA = result.unshift('z', 3).all();
-
-    testThis(result.all(), ['z', 3, 'a', 'b', 'a', 2]);
-    testThis(unshiftA, ['z', 3, 'a', 'b', 'a', 2]);
-
-    const orderA = result.order().all();
-
-    testThis(result.all(), ['z', 3, 'a', 'b', 'a', 2]);
-    testThis(orderA, [2, 3, 'a', 'a', 'b', 'z']);
-
-    const orderB = result.order(true).all();
-
-    testThis(result.all(), ['z', 3, 'a', 'b', 'a', 2]);
-    testThis(orderB, ['z', 'b', 'a', 'a', 3, 2]);
-
-    resultObject = new Collection([{ a: 2 }, { a: 'b' }, { a: 'a' }, { a: 1 }]);
-
-    const orderC = resultObject.orderBy('a').all();
-
-    testThis(resultObject.all(), [{ a: 2 }, { a: 'b' }, { a: 'a' }, { a: 1 }]);
-    testThis(orderC, [{ a: 1 }, { a: 2 }, { a: 'a' }, { a: 'b' }]);
-
-    const orderD = resultObject.orderBy('a', true).all();
-
-    testThis(resultObject.all(), [{ a: 2 }, { a: 'b' }, { a: 'a' }, { a: 1 }]);
-    testThis(orderD, [{ a: 'b' }, { a: 'a' }, { a: 2 }, { a: 1 }]);
-
-    const spliceA = result.splice(0, 2).all();
-    const spliceB = result.splice(2, 1).all();
-    const spliceC = result.splice(2, 0, 1).all();
-
-    testThis(result.all(), ['a', 'b', 1, 2]);
-    testThis(spliceA, ['a', 'b', 1, 2]);
-    testThis(spliceB, ['a', 'b', 1, 2]);
-    testThis(spliceC, ['a', 'b', 1, 2]);
-
-    const padA = result.pad(6, 0).all();
-    const padB = result.pad(-6, 0).all();
-
-    testThis(result.all(), ['a', 'b', 1, 2]);
-    testThis(padA, ['a', 'b', 1, 2, 0, 0]);
-    testThis(padB, [0, 0, 'a', 'b', 1, 2]);
-
-    const [partitionA, partitionB] = result.partition((value) => value === 'b');
-
-    testThis(result.all(), ['a', 'b', 1, 2]);
-    testThis(partitionA.all(), ['b']);
-    testThis(partitionB.all(), ['a', 1, 2]);
-
-    const popA = result.pop();
-
-    testThis(result.all(), ['a', 'b', 1]);
-    testThis(popA, 2);
-
-    const prependA = result.prepend('z').all();
-
-    testThis(result.all(), ['a', 'b', 1]);
-    testThis(prependA, ['z', 'a', 'b', 1]);
-
-    const randomA = result.random().all();
-    const randomB = result.random(2).all();
-    const randomC = result.random(5).all();
-    const randomD = result.random(5, true).all();
-
-    testThis(result.all(), ['a', 'b', 1]);
-    expect(typeof randomA, 'object');
-    expect(randomA.length, 1);
-    expect(typeof randomB, 'object');
-    expect(randomB.length, 2);
-    expect(typeof randomC, 'object');
-    expect(randomC.length, 5);
-    expect(typeof randomD, 'object');
-    expect(randomD.length, 3);
-
-    const reduceA = result.reduce((acc, value) => typeof value === 'number' && value + acc, 0);
-
-    testThis(result.all(), ['a', 'b', 1]);
-    testThis(reduceA, 1);
-
-    const reverseA = result.reverse().all();
-
-    testThis(result.all(), [1, 'b', 'a']);
-    testThis(reverseA, [1, 'b', 'a']);
-
-    const shiftA = result.shift();
-
-    testThis(result.all(), ['b', 'a']);
-    testThis(shiftA, 1);
-
-    const shuffleA = result.shuffle().all();
-
-    expect(typeof result.all(), 'object');
-    expect(result.all().length, 2);
-    expect(typeof shuffleA, 'object');
-    expect(shuffleA.length, 2);
-
-    result = new Collection(['z', 'b', 'a', 2, 1]);
-
-    const sortA = result.sort().all();
-
-    testThis(result.all(), [1, 2, 'a', 'b', 'z']);
-    testThis(sortA, [1, 2, 'a', 'b', 'z']);
-
-    const sortB = result.sort(true).all();
-
-    testThis(result.all(), ['z', 'b', 'a', 2, 1]);
-    testThis(sortB, ['z', 'b', 'a', 2, 1]);
-
-    resultObject = new Collection([{ a: 2 }, { a: 'b' }, { a: 'a' }, { a: 1 }]);
-
-    const sortC = resultObject.sortBy('a').all();
-
-    testThis(resultObject.all(), [{ a: 1 }, { a: 2 }, { a: 'a' }, { a: 'b' }]);
-    testThis(sortC, [{ a: 1 }, { a: 2 }, { a: 'a' }, { a: 'b' }]);
-
-    const sortD = resultObject.sortBy('a', true).all();
-
-    testThis(resultObject.all(), [{ a: 'b' }, { a: 'a' }, { a: 2 }, { a: 1 }]);
-    testThis(sortD, [{ a: 'b' }, { a: 'a' }, { a: 2 }, { a: 1 }]);
-
-    const sumA = result.sum();
-
-    testThis(result.all(), ['z', 'b', 'a', 2, 1]);
-    testThis(sumA, 3);
-
-    const sumB = resultObject.sum('a');
-
-    testThis(resultObject.all(), [{ a: 'b' }, { a: 'a' }, { a: 2 }, { a: 1 }]);
-    testThis(sumB, 3);
-
-    const takeA = result.take(2).all();
-
-    testThis(result.all(), ['z', 'b', 'a', 2, 1]);
-    testThis(takeA, ['z', 'b']);
-
-    const transformA = result.transform(() => 3).all();
-
-    testThis(result.all(), [3, 3, 3, 3, 3]);
-    testThis(transformA, [3, 3, 3, 3, 3]);
-
-    const transformB = resultObject.transform(() => ({ a: 3 })).all();
-
-    testThis(resultObject.all(), [{ a: 3 }, { a: 3 }, { a: 3 }, { a: 3 }]);
-    testThis(transformB, [{ a: 3 }, { a: 3 }, { a: 3 }, { a: 3 }]);
-
-    const uniqA = result.uniq().all();
-
-    testThis(result.all(), [3, 3, 3, 3, 3]);
-    testThis(uniqA, [3]);
-
-    const uniqB = resultObject.uniqBy('a').all();
-
-    testThis(resultObject.all(), [{ a: 3 }, { a: 3 }, { a: 3 }, { a: 3 }]);
-    testThis(uniqB, [{ a: 3 }]);
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ allA, expect: ['a', 'b'] });
+    });
+
+    void test(app, 'collect:allDeep', () => {
+      const collectionTest = collect().append(collectionString.clone());
+      const allA = collectionTest.allDeep();
+
+      testThis({ allA, expect: [['a', 'b']] });
+    });
+
+    void test(app, 'collect:append', () => {
+      const collectionTest = collectionString.clone();
+      const appendA = collectionTest.append<string | number>('c', 1).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ appendA, expect: ['a', 'b', 'c', 1] });
+    });
+
+    void test(app, 'collect:at', () => {
+      const collectionTest = collectionString.clone();
+      const atA = collectionTest.at(0);
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ atA, expect: 'a' });
+    });
+
+    void test(app, 'collect:chunk', () => {
+      const collectionTest = collectionString.clone();
+      const chunkA = collectionTest.chunk(1).allDeep();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ chunkA, expect: [['a'], ['b']] });
+    });
+
+    void test(app, 'collect:chunkWhile', () => {
+      const collectionTest = collectionString.clone();
+      const chunkWhileA = collectionTest.chunkWhile((item) => item === 'b').allDeep();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ chunkWhileA, expect: [['a'], ['b']] });
+    });
+
+    void test(app, 'collect:clone', () => {
+      const collectionTest = collectionString.clone();
+      const cloneA = collectionTest.clone();
+
+      collectionTest.push('d');
+      cloneA.push('e');
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b', 'd'] });
+      testThis({ cloneA: cloneA.all(), expect: ['a', 'b', 'e'] });
+    });
+
+    void test(app, 'collect:concat', () => {
+      const collectionTest = collectionString.clone();
+      const concatA = collectionTest.concat<string | number>(['a', 'z'], [1]).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ concatA, expect: ['a', 'b', 'a', 'z', 1] });
+    });
+
+    void test(app, 'collect:concatUniq', () => {
+      const collectionTest = collectionString.clone();
+      const concatUniqA = collectionTest.concatUniq<string | number>(['a', 'z'], [1]).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ concatUniqA, expect: ['a', 'b', 'z', 1] });
+    });
+
+    void test(app, 'collect:contains', () => {
+      const collectionTest = collectionString.clone();
+      const containsA = collectionTest.contains((value) => value === 'b');
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ containsA, expect: true });
+    });
+
+    void test(app, 'collect:count', () => {
+      const collectionTest = collectionString.clone();
+      const countA = collectionTest.count();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ countA, expect: 2 });
+    });
+
+    void test(app, 'collect:each', () => {
+      const collectionTest = collectionString.clone();
+      const eachA = collectionTest.each(() => 3).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ eachA, expect: ['a', 'b'] });
+    });
+
+    void test(app, 'collect:entries', () => {
+      const collectionTest = collectionString.clone();
+      const entriesA = collectionTest.entries();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({
+        entriesA,
+        expect: [
+          [0, 'a'],
+          [1, 'b'],
+        ],
+      });
+    });
+
+    void test(app, 'collect:every', () => {
+      const collectionTest = collectionString.clone();
+      const everyA = collectionTest.every((value) => value === 'a');
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ everyA, expect: false });
+    });
+
+    void test(app, 'collect:filter', () => {
+      const collectionTest = collectionString.clone().append('');
+      const filterA = collectionTest.filter().all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b', ''] });
+      testThis({ filterA, expect: ['a', 'b'] });
+    });
+
+    void test(app, 'collect:filter:callback', () => {
+      const collectionTest = collectionString.clone().append('');
+      const filterA = collectionTest.filter((value) => value !== 'a').all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b', ''] });
+      testThis({ filterA, expect: ['b', ''] });
+    });
+
+    void test(app, 'collect:first', () => {
+      const collectionTest = collectionString.clone();
+      const firstA = collectionTest.first();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ firstA, expect: 'a' });
+    });
+
+    void test(app, 'collect:first:callback', () => {
+      const collectionTest = collectionString.clone().append('');
+      const firstB = collectionTest.first((value) => !value);
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b', ''] });
+      testThis({ firstB, expect: '' });
+    });
+
+    void test(app, 'collect:flatten', () => {
+      const collectionTest = collectionString.clone();
+      const flattenA = collectionTest
+        .append([3, 4], [['c', 5], 6])
+        .flatten()
+        .all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ flattenA, expect: ['a', 'b', 3, 4, ['c', 5], 6] });
+    });
+
+    void test(app, 'collect:flatten:deep', () => {
+      const collectionTest = collectionString.clone();
+      const flattenA = collectionTest
+        .append([3, 4], [['c', 5], 6])
+        .flatten(true)
+        .all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ flattenA, expect: ['a', 'b', 3, 4, 'c', 5, 6] });
+    });
+
+    void test(app, 'collect:invert', () => {
+      const collectionTest = collectionString.clone();
+      const invertA = collectionTest.invert().all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ invertA, expect: ['b', 'a'] });
+    });
+
+    void test(app, 'collect:join', () => {
+      const collectionTest = collectionString.clone().append('c', 'd', '', 'z');
+      const joinA = collectionTest.join();
+      const joinB = collectionTest.join('$');
+      const joinC = collectionTest.join('_', { first: '-' });
+      const joinD = collectionTest.join('!', { last: '?' });
+      const joinE = collectionTest.join('.', { first: ':', last: ';' });
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b', 'c', 'd', '', 'z'] });
+      testThis({ joinA, expect: 'abcdz' });
+      testThis({ joinB, expect: 'a$b$c$d$$z' });
+      testThis({ joinC, expect: 'a-b_c_d__z' });
+      testThis({ joinD, expect: 'a!b!c!d!?z' });
+      testThis({ joinE, expect: 'a:b.c.d.;z' });
+    });
+
+    void test(app, 'collect:joinBy', () => {
+      const collectionTest = collectionObjectString.clone().append({ a: 'c' }, { a: 'd' }, { a: '' }, { a: 'z' });
+      const joinA = collectionTest.joinBy('a');
+      const joinB = collectionTest.joinBy('a', '$');
+      const joinC = collectionTest.joinBy('a', '_', { first: '-' });
+      const joinD = collectionTest.joinBy('a', '!', { last: '?' });
+      const joinE = collectionTest.joinBy('a', '.', { first: ':', last: ';' });
+
+      testThis({
+        collection: collectionTest.all(),
+        expect: [{ a: 'a' }, { a: 'b' }, { a: 'c' }, { a: 'd' }, { a: '' }, { a: 'z' }],
+      });
+      testThis({ joinA, expect: 'abcdz' });
+      testThis({ joinB, expect: 'a$b$c$d$$z' });
+      testThis({ joinC, expect: 'a-b_c_d__z' });
+      testThis({ joinD, expect: 'a!b!c!d!?z' });
+      testThis({ joinE, expect: 'a:b.c.d.;z' });
+    });
+
+    void test(app, 'collect:keyBy', () => {
+      const collectionTest = collectionObjectString.clone();
+      const keyByA = collectionTest.keyBy('a');
+
+      testThis({ collection: collectionTest.all(), expect: [{ a: 'a' }, { a: 'b' }] });
+      testThis({ keyByA, expect: { a: { a: 'a' }, b: { a: 'b' } } });
+    });
+
+    void test(app, 'collect:keys', () => {
+      const collectionTest = collectionString.clone();
+      const keysA = collectionTest.keys();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ keysA, expect: [0, 1] });
+    });
+
+    void test(app, 'collect:last', () => {
+      const collectionTest = collectionString.clone().append('');
+      const lastA = collectionTest.last();
+      const lastB = collectionTest.last((value) => !!value);
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b', ''] });
+      testThis({ lastA, expect: '' });
+      testThis({ lastB, expect: 'b' });
+    });
+
+    void test(app, 'collect:map', () => {
+      const collectionTest = collectionString.clone();
+      const mapA = collectionTest.map(() => 3).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ mapA, expect: [3, 3] });
+    });
+
+    void test(app, 'collect:max', () => {
+      const collectionTest = collectionNumber.clone();
+      const maxA = collectionTest.max();
+
+      testThis({ collection: collectionTest.all(), expect: [1, 2] });
+      testThis({ maxA, expect: 2 });
+    });
+
+    void test(app, 'collect:max:key', () => {
+      const collectionTest = collectionObjectNumber.clone();
+      const maxB = collectionTest.max('a');
+
+      testThis({ collection: collectionTest.all(), expect: [{ a: 1 }, { a: 2 }] });
+      testThis({ maxB, expect: 2 });
+    });
+
+    void test(app, 'collect:min', () => {
+      const collectionTest = collectionNumber.clone();
+      const minA = collectionTest.min();
+
+      testThis({ collection: collectionTest.all(), expect: [1, 2] });
+      testThis({ minA, expect: 1 });
+    });
+
+    void test(app, 'collect:min:key', () => {
+      const collectionTest = collectionObjectNumber.clone();
+      const minB = collectionTest.min('a');
+
+      testThis({ collection: collectionTest.all(), expect: [{ a: 1 }, { a: 2 }] });
+      testThis({ minB, expect: 1 });
+    });
+
+    void test(app, 'collect:order', () => {
+      const collectionTest = collectionString.clone().prepend('z');
+      const orderA = collectionTest.order().all();
+
+      testThis({ collection: collectionTest.all(), expect: ['z', 'a', 'b'] });
+      testThis({ orderA, expect: ['a', 'b', 'z'] });
+    });
+
+    void test(app, 'collect:order:revers', () => {
+      const collectionTest = collectionString.clone().prepend('z');
+      const orderB = collectionTest.order(true).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['z', 'a', 'b'] });
+      testThis({ orderB, expect: ['z', 'b', 'a'] });
+    });
+
+    void test(app, 'collect:orderBy', () => {
+      const collectionTest = collectionObjectString.clone().prepend({ a: 'z' });
+      const orderC = collectionTest.orderBy('a').all();
+
+      testThis({ collection: collectionTest.all(), expect: [{ a: 'z' }, { a: 'a' }, { a: 'b' }] });
+      testThis({ orderC, expect: [{ a: 'a' }, { a: 'b' }, { a: 'z' }] });
+    });
+
+    void test(app, 'collect:orderBy:reverse', () => {
+      const collectionTest = collectionObjectString.clone().prepend({ a: 'z' });
+      const orderD = collectionTest.orderBy('a', true).all();
+
+      testThis({ collection: collectionTest.all(), expect: [{ a: 'z' }, { a: 'a' }, { a: 'b' }] });
+      testThis({ orderD, expect: [{ a: 'z' }, { a: 'b' }, { a: 'a' }] });
+    });
+
+    void test(app, 'collect:pad', () => {
+      const collectionTest = collectionString.clone();
+      const padA = collectionTest.pad(collectionTest.count() + 2, 0).all();
+      const padB = collectionTest.pad(0 - (collectionTest.count() + 2), 0).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ padA, expect: ['a', 'b', 0, 0] });
+      testThis({ padB, expect: [0, 0, 'a', 'b'] });
+    });
+
+    void test(app, 'collect:partition', () => {
+      const collectionTest = collectionString.clone();
+      const [partitionA, partitionB] = collectionTest.partition((value) => value === 'b');
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ partitionA: partitionA.all(), expect: ['b'] });
+      testThis({ partitionB: partitionB.all(), expect: ['a'] });
+    });
+
+    void test(app, 'collect:pop', () => {
+      const collectionTest = collectionString.clone();
+      const popA = collectionTest.pop();
+
+      testThis({ collection: collectionTest.all(), expect: ['a'] });
+      testThis({ popA, expect: 'b' });
+    });
+
+    void test(app, 'collect:prepend', () => {
+      const collectionTest = collectionString.clone();
+      const prependA = collectionTest.prepend('z').all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ prependA, expect: ['z', 'a', 'b'] });
+    });
+
+    void test(app, 'collect:push', () => {
+      const collectionTest = collectionString.clone();
+      const pushA = collectionTest.push('a', 'z').all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b', 'a', 'z'] });
+      testThis({ pushA, expect: ['a', 'b', 'a', 'z'] });
+    });
+
+    void test(app, 'collect:pushUniq', () => {
+      const collectionTest = collectionString.clone();
+      const pushUniqA = collectionTest.pushUniq('a', 'z').all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b', 'z'] });
+      testThis({ pushUniqA, expect: ['a', 'b', 'z'] });
+    });
+
+    void test(app, 'collect:random', () => {
+      const collectionTest = collectionString.clone();
+      const randomA = collectionTest.random().all();
+      const randomB = collectionTest.random(5).all();
+      const randomC = collectionTest.random(5, true).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ randomA: typeof randomA, expect: 'object' });
+      testThis({ randomALength: randomA.length, expect: 1 });
+      testThis({ randomB: typeof randomB, expect: 'object' });
+      testThis({ randomBLength: randomB.length, expect: 5 });
+      testThis({ randomC: typeof randomC, expect: 'object' });
+      testThis({ randomCLength: randomC.length, expect: 2 });
+    });
+
+    void test(app, 'collect:reduce', () => {
+      const collectionTest = collectionString.clone().append('');
+      const reduceA = collectionTest.reduce((acc, value) => acc + (value ? 1 : 0), 0);
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b', ''] });
+      testThis({ reduceA, expect: 2 });
+    });
+
+    void test(app, 'collect:reverse', () => {
+      const collectionTest = collectionString.clone();
+      const reverseA = collectionTest.reverse().all();
+
+      testThis({ collection: collectionTest.all(), expect: ['b', 'a'] });
+      testThis({ reverseA, expect: ['b', 'a'] });
+    });
+
+    void test(app, 'collect:shift', () => {
+      const collectionTest = collectionString.clone();
+      const shiftA = collectionTest.shift();
+
+      testThis({ collection: collectionTest.all(), expect: ['b'] });
+      testThis({ shiftA, expect: 'a' });
+    });
+
+    void test(app, 'collect:shuffle', () => {
+      const collectionTest = collectionString.clone();
+      const shuffleA = collectionTest.shuffle().all();
+
+      testThis({ shuffleA: typeof shuffleA, expect: 'object' });
+      testThis({ shuffleALength: shuffleA.length, expect: 2 });
+      testThis({ shuffleAA: shuffleA.indexOf('a') >= 0, expect: true });
+      testThis({ shuffleAB: shuffleA.indexOf('b') >= 0, expect: true });
+    });
+
+    void test(app, 'collect:slice', () => {
+      const collectionTest = collectionString.clone();
+      const sliceA = collectionTest.slice(1).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ sliceA, expect: ['b'] });
+    });
+
+    void test(app, 'collect:sort', () => {
+      const collectionTest = collectionString.clone();
+      const sortA = collectionTest.sort().all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ sortA, expect: ['a', 'b'] });
+    });
+
+    void test(app, 'collect:sort:reverse', () => {
+      const collectionTest = collectionString.clone();
+      const sortB = collectionTest.sort(true).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['b', 'a'] });
+      testThis({ sortB, expect: ['b', 'a'] });
+    });
+
+    void test(app, 'collect:sortBy', () => {
+      const collectionTest = collectionObjectString.clone();
+      const sortC = collectionTest.sortBy('a').all();
+
+      testThis({ collection: collectionTest.all(), expect: [{ a: 'a' }, { a: 'b' }] });
+      testThis({ sortC, expect: [{ a: 'a' }, { a: 'b' }] });
+    });
+
+    void test(app, 'collect:sortBy:reverse', () => {
+      const collectionTest = collectionObjectString.clone();
+      const sortD = collectionTest.sortBy('a', true).all();
+
+      testThis({ collection: collectionTest.all(), expect: [{ a: 'b' }, { a: 'a' }] });
+      testThis({ sortD, expect: [{ a: 'b' }, { a: 'a' }] });
+    });
+
+    void test(app, 'collect:splice', () => {
+      const collectionTest = collectionString.clone();
+      const spliceA = collectionTest.splice(1, 0, ['x', 'z']).all();
+
+      testThis({ spliceA, expect: ['a', 'x', 'z', 'b'] });
+
+      const spliceB = collectionTest.splice(1, 1).all();
+
+      testThis({ spliceB, expect: ['a', 'z', 'b'] });
+
+      const spliceC = collectionTest.splice(1, 1, ['']).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', '', 'b'] });
+      testThis({ spliceC, expect: ['a', '', 'b'] });
+    });
+
+    void test(app, 'collect:sum', () => {
+      const collectionTest = collectionNumber.clone();
+      const sumA = collectionTest.sum();
+
+      testThis({ collection: collectionTest.all(), expect: [1, 2] });
+      testThis({ sumA, expect: 3 });
+    });
+
+    void test(app, 'collect:sum:key', () => {
+      const collectionTest = collectionObjectNumber.clone();
+      const sumB = collectionTest.sum('a');
+
+      testThis({ collection: collectionTest.all(), expect: [{ a: 1 }, { a: 2 }] });
+      testThis({ sumB, expect: 3 });
+    });
+
+    void test(app, 'collect:take', () => {
+      const collectionTest = collectionString.clone();
+      const takeA = collectionTest.take(1).all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b'] });
+      testThis({ takeA, expect: ['a'] });
+    });
+
+    void test(app, 'collect:transform', () => {
+      const collectionTest = collectionString.clone();
+      const transformA = collectionTest.transform(() => 3).all();
+
+      testThis({ collection: collectionTest.all(), expect: [3, 3] });
+      testThis({ transformA, expect: [3, 3] });
+    });
+
+    void test(app, 'collect:unshift', () => {
+      const collectionTest = collectionString.clone();
+      const unshiftA = collectionTest.unshift('').all();
+
+      testThis({ collection: collectionTest.all(), expect: ['', 'a', 'b'] });
+      testThis({ unshiftA, expect: ['', 'a', 'b'] });
+    });
+
+    void test(app, 'collect:uniq', () => {
+      const collectionTest = collectionString.clone().append('a');
+      const uniqA = collectionTest.uniq().all();
+
+      testThis({ collection: collectionTest.all(), expect: ['a', 'b', 'a'] });
+      testThis({ uniqA, expect: ['a', 'b'] });
+    });
+
+    void test(app, 'collect:uniqBy', () => {
+      const collectionTest = collectionObjectString.clone().append({ a: 'a' });
+      const uniqB = collectionTest.uniqBy('a').all();
+
+      testThis({ collection: collectionTest.all(), expect: [{ a: 'a' }, { a: 'b' }, { a: 'a' }] });
+      testThis({ uniqB, expect: [{ a: 'a' }, { a: 'b' }] });
+    });
   });
 };

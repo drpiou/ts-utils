@@ -7,5 +7,5 @@
  * @param items Items to add.
  * @returns Collection
  */
-declare const pushUniq: <S, I>(source: S[], ...items: I[]) => (S | I)[];
+declare const pushUniq: <S>(source: S[], ...items: S[]) => S[];
 export default pushUniq;

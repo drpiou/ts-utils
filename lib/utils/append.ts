@@ -12,8 +12,8 @@ import clone from './clone';
  * @param items Items to add.
  * @returns Array
  */
-const append = <S, I>(source: S[], ...items: I[]): (S | I)[] => {
-  const result: (S | I)[] = clone(source);
+const append = <S>(source: S[], ...items: S[]): S[] => {
+  const result = clone(source);
 
   result.push(...items);
 

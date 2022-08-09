@@ -7,5 +7,5 @@
  * @param items Items to add.
  * @returns Collection
  */
-declare const concatUniq: <S, I>(source: S[], ...items: I[][]) => (S | I)[];
+declare const concatUniq: <S>(source: S[], ...items: S[][]) => S[];
 export default concatUniq;

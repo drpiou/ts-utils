@@ -82,7 +82,7 @@ export default class Collection<Item = unknown> {
    * @returns Collection
    */
   append<I>(...items: I[]): Collection<Item | I> {
-    return collect<Item | I>(this.items).push(...items);
+    return collect(this.items as (Item | I)[]).push(...items);
   }
 
   /**
@@ -163,7 +163,7 @@ export default class Collection<Item = unknown> {
    * @returns Collection
    */
   concat<I>(...items: (I[] | Collection<I>)[]): Collection<Item | I> {
-    const _result: (Item | I)[] = clone(this.items);
+    const _result = clone(this.items as (Item | I)[]);
 
     const c = items.length;
 
@@ -187,7 +187,7 @@ export default class Collection<Item = unknown> {
    * @returns Collection
    */
   concatUniq<I>(...items: (I[] | Collection<I>)[]): Collection<Item | I> {
-    const _result: (Item | I)[] = clone(this.items);
+    const _result = clone(this.items as (Item | I)[]);
 
     const c = items.length;
 
@@ -455,8 +455,8 @@ export default class Collection<Item = unknown> {
    * @param value Item to fill.
    * @returns Collection
    */
-  pad(count: number, value: Item): Collection<Item> {
-    return collect(pad(this.items, count, value));
+  pad<I>(count: number, value: I): Collection<Item | I> {
+    return collect(pad(this.items as (Item | I)[], count, value));
   }
 
   /**
@@ -499,7 +499,7 @@ export default class Collection<Item = unknown> {
    * @returns Collection
    */
   prepend<I>(...items: I[]): Collection<Item | I> {
-    return collect<Item | I>(this.items).unshift(...items);
+    return collect(this.items as (Item | I)[]).unshift(...items);
   }
 
   /**
@@ -513,8 +513,8 @@ export default class Collection<Item = unknown> {
    * @param items Items to add.
    * @returns Collection
    */
-  push<I>(...items: I[]): Collection<Item | I> {
-    (this.items as (Item | I)[]).push(...items);
+  push(...items: Item[]): Collection<Item> {
+    this.items.push(...items);
 
     return this;
   }
@@ -530,7 +530,7 @@ export default class Collection<Item = unknown> {
    * @param items Items to add.
    * @returns Collection
    */
-  pushUniq<I>(...items: I[]): Collection<Item | I> {
+  pushUniq(...items: Item[]): Collection<Item> {
     pushUniq(this.items, ...items);
 
     return this;
@@ -597,7 +597,7 @@ export default class Collection<Item = unknown> {
    * @returns Collection
    */
   shuffle(): Collection<Item> {
-    this.items = random(this.items, this.items.length);
+    this.items = random(this.items, this.items.length, true);
 
     return this;
   }
@@ -662,8 +662,8 @@ export default class Collection<Item = unknown> {
    * @param items Items to add.
    * @returns Collection
    */
-  splice<I>(start: number, deleteCount?: number, items?: I | I[] | Collection<I>): Collection<Item | I> {
-    (this.items as (Item | I)[]).splice(start, deleteCount || 0, ...castItems(items || []));
+  splice(start: number, deleteCount?: number, items?: Item[] | Collection<Item>): Collection<Item> {
+    this.items.splice(start, deleteCount || 0, ...castItems(items || []));
 
     return this;
   }
@@ -716,8 +716,8 @@ export default class Collection<Item = unknown> {
    * @param items Items to add.
    * @returns Collection
    */
-  unshift<I>(...items: I[]): Collection<Item | I> {
-    (this.items as (Item | I)[]).unshift(...items);
+  unshift(...items: Item[]): Collection<Item> {
+    this.items.unshift(...items);
 
     return this;
   }

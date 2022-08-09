@@ -1,8 +1,7 @@
 'use strict';
 
 import { invert } from '../../lib';
-import { test } from './test';
-import { testThis } from './testThis';
+import { test, testThis } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'invert', () => {
@@ -10,7 +9,7 @@ export default (app: HTMLDivElement): void => {
 
     const result = invert(source);
 
-    testThis(source, ['a', 'b', 1]);
-    testThis(result, [1, 'b', 'a']);
+    testThis({ source, expect: ['a', 'b', 1] });
+    testThis({ result, expect: [1, 'b', 'a'] });
   });
 };

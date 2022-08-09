@@ -1,8 +1,7 @@
 'use strict';
 
 import { last } from '../../lib';
-import { test } from './test';
-import { testThis } from './testThis';
+import { test, testThis } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'last', () => {
@@ -11,8 +10,8 @@ export default (app: HTMLDivElement): void => {
     const resultA = last(source);
     const resultB = last(source, (value) => typeof value === 'string');
 
-    testThis(source, ['a', 'b', 1]);
-    testThis(resultA, 1);
-    testThis(resultB, 'b');
+    testThis({ source, expect: ['a', 'b', 1] });
+    testThis({ resultA, expect: 1 });
+    testThis({ resultB, expect: 'b' });
   });
 };

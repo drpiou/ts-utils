@@ -1,8 +1,7 @@
 'use strict';
 
 import { clone } from '../../lib';
-import { test } from './test';
-import { testThis } from './testThis';
+import { test, testThis } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'clone', () => {
@@ -13,7 +12,7 @@ export default (app: HTMLDivElement): void => {
     source.push(2);
     result.push(3);
 
-    testThis(source, ['a', 'b', 1, 2]);
-    testThis(result, ['a', 'b', 1, 3]);
+    testThis({ source, expect: ['a', 'b', 1, 2] });
+    testThis({ result, expect: ['a', 'b', 1, 3] });
   });
 };

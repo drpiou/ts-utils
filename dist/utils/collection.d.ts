@@ -284,7 +284,7 @@ export default class Collection<Item = unknown> {
      * @param value Item to fill.
      * @returns Collection
      */
-    pad(count: number, value: Item): Collection<Item>;
+    pad<I>(count: number, value: I): Collection<Item | I>;
     /**
      * Separate items that pass a given truth test in the collection.
      *
@@ -328,7 +328,7 @@ export default class Collection<Item = unknown> {
      * @param items Items to add.
      * @returns Collection
      */
-    push<I>(...items: I[]): Collection<Item | I>;
+    push(...items: Item[]): Collection<Item>;
     /**
      * Add the given items to the end of the collection.
      *
@@ -340,7 +340,7 @@ export default class Collection<Item = unknown> {
      * @param items Items to add.
      * @returns Collection
      */
-    pushUniq<I>(...items: I[]): Collection<Item | I>;
+    pushUniq(...items: Item[]): Collection<Item>;
     /**
      * Return random items from the collection.
      *
@@ -435,7 +435,7 @@ export default class Collection<Item = unknown> {
      * @param items Items to add.
      * @returns Collection
      */
-    splice<I>(start: number, deleteCount?: number, items?: I | I[] | Collection<I>): Collection<Item | I>;
+    splice(start: number, deleteCount?: number, items?: Item[] | Collection<Item>): Collection<Item>;
     /**
      * Return the sum of the items in the collection.
      *
@@ -473,7 +473,7 @@ export default class Collection<Item = unknown> {
      * @param items Items to add.
      * @returns Collection
      */
-    unshift<I>(...items: I[]): Collection<Item | I>;
+    unshift(...items: Item[]): Collection<Item>;
     /**
      * Return all the unique items in the collection.
      *
