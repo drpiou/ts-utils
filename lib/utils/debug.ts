@@ -50,7 +50,7 @@ export default class Debug {
    * @param params Parameters to log.
    * @returns void
    */
-  private debug(method: (...params: unknown[]) => void, params: unknown[]): void {
+  private debug(method: (...params: any) => void, params: unknown[]): void {
     if (this.options.active) {
       method(...params.map(this.options.transform));
     }
@@ -72,7 +72,7 @@ export default class Debug {
    * @param params Parameters to log.
    * @returns void
    */
-  info(...params: unknown[]): void {
+  info(...params: [string, ...unknown[]]): void {
     this.debug(logInfo, params);
   }
 
@@ -82,7 +82,7 @@ export default class Debug {
    * @param params Parameters to log.
    * @returns void
    */
-  warn(...params: unknown[]): void {
+  warn(...params: [string, ...unknown[]]): void {
     this.debug(logWarn, params);
   }
 
@@ -92,7 +92,7 @@ export default class Debug {
    * @param params Parameters to log.
    * @returns void
    */
-  error(...params: unknown[]): void {
+  error(...params: [string, ...unknown[]]): void {
     this.debug(logError, params);
   }
 }

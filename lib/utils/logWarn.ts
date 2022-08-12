@@ -6,7 +6,7 @@ import log from './log';
  * @param params Parameters to log.
  * @returns void
  */
-const logWarn = (...params: unknown[]): void => {
+const logWarn = (...params: [string, ...unknown[]]): void => {
   log('\x1b[33m%s\x1b[0m', ...params);
 };
 

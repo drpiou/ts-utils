@@ -42,19 +42,19 @@ export default class Debug {
      * @param params Parameters to log.
      * @returns void
      */
-    info(...params: unknown[]): void;
+    info(...params: [string, ...unknown[]]): void;
     /**
      * Log warn in the console the params.
      *
      * @param params Parameters to log.
      * @returns void
      */
-    warn(...params: unknown[]): void;
+    warn(...params: [string, ...unknown[]]): void;
     /**
      * Log error in the console the params.
      *
      * @param params Parameters to log.
      * @returns void
      */
-    error(...params: unknown[]): void;
+    error(...params: [string, ...unknown[]]): void;
 }
