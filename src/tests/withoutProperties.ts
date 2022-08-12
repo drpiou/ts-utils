@@ -1,7 +1,7 @@
 'use strict';
 
 import { withoutProperties } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'withoutProperties', () => {
@@ -9,7 +9,7 @@ export default (app: HTMLDivElement): void => {
 
     const result = withoutProperties(source, ['b']);
 
-    testThis({ source, expect: { a: 1, b: 2 } });
-    testThis({ result, expect: { a: 1 } });
+    expect({ source, expect: { a: 1, b: 2 } });
+    expect({ result, expect: { a: 1 } });
   });
 };

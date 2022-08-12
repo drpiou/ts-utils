@@ -1,7 +1,7 @@
 'use strict';
 
 import { usleep } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'usleep', async () => {
@@ -13,6 +13,6 @@ export default (app: HTMLDivElement): void => {
 
     const result = time >= 99;
 
-    testThis({ result, expect: true });
+    expect({ result, expect: true });
   });
 };

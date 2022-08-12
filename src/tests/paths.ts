@@ -1,7 +1,7 @@
 'use strict';
 
 import { paths } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'paths', () => {
@@ -9,7 +9,7 @@ export default (app: HTMLDivElement): void => {
 
     const result = paths(source);
 
-    testThis({ source, expect: { a: 1, b: { c: 2 } } });
-    testThis({ result, expect: ['a', 'b', 'b.c'] });
+    expect({ source, expect: { a: 1, b: { c: 2 } } });
+    expect({ result, expect: ['a', 'b', 'b.c'] });
   });
 };

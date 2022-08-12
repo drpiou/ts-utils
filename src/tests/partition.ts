@@ -1,7 +1,7 @@
 'use strict';
 
 import { partition } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'partition', () => {
@@ -9,7 +9,7 @@ export default (app: HTMLDivElement): void => {
 
     const result = partition(source, (value) => value === 'b');
 
-    testThis({ source, expect: ['a', 'b', 1] });
-    testThis({ result, expect: [['b'], ['a', 1]] });
+    expect({ source, expect: ['a', 'b', 1] });
+    expect({ result, expect: [['b'], ['a', 1]] });
   });
 };

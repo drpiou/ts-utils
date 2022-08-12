@@ -1,7 +1,7 @@
 'use strict';
 
 import { every } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'every', () => {
@@ -9,7 +9,7 @@ export default (app: HTMLDivElement): void => {
 
     const result = every(source, (value) => typeof value === 'string');
 
-    testThis({ source, expect: ['a', 'b', 1] });
-    testThis({ result, expect: false });
+    expect({ source, expect: ['a', 'b', 1] });
+    expect({ result, expect: false });
   });
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 import { join } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'join', () => {
@@ -13,11 +13,11 @@ export default (app: HTMLDivElement): void => {
     const resultD = join(source, '!', { last: '?' });
     const resultE = join(source, '.', { first: ':', last: ';' });
 
-    testThis({ source, expect: ['a', 'b', 1, 2] });
-    testThis({ resultA, expect: 'ab12' });
-    testThis({ resultB, expect: 'a$b$1$2' });
-    testThis({ resultC, expect: 'a-b_1_2' });
-    testThis({ resultD, expect: 'a!b!1?2' });
-    testThis({ resultE, expect: 'a:b.1;2' });
+    expect({ source, expect: ['a', 'b', 1, 2] });
+    expect({ resultA, expect: 'ab12' });
+    expect({ resultB, expect: 'a$b$1$2' });
+    expect({ resultC, expect: 'a-b_1_2' });
+    expect({ resultD, expect: 'a!b!1?2' });
+    expect({ resultE, expect: 'a:b.1;2' });
   });
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 import { flatten } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'flatten', () => {
@@ -10,8 +10,8 @@ export default (app: HTMLDivElement): void => {
     const resultA = flatten(source);
     const resultB = flatten(source, true);
 
-    testThis({ source, expect: ['a', 'b', [1], [['c', 2]]] });
-    testThis({ resultA, expect: ['a', 'b', 1, ['c', 2]] });
-    testThis({ resultB, expect: ['a', 'b', 1, 'c', 2] });
+    expect({ source, expect: ['a', 'b', [1], [['c', 2]]] });
+    expect({ resultA, expect: ['a', 'b', 1, ['c', 2]] });
+    expect({ resultB, expect: ['a', 'b', 1, 'c', 2] });
   });
 };

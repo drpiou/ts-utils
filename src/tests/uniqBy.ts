@@ -1,7 +1,7 @@
 'use strict';
 
 import { uniqBy } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'uniqBy', () => {
@@ -9,7 +9,7 @@ export default (app: HTMLDivElement): void => {
 
     const result = uniqBy(source, 'a');
 
-    testThis({ source, expect: [{ a: 'a' }, { a: 'b' }, { a: 'a' }, { a: 1 }] });
-    testThis({ result, expect: [{ a: 'a' }, { a: 'b' }, { a: 1 }] });
+    expect({ source, expect: [{ a: 'a' }, { a: 'b' }, { a: 'a' }, { a: 1 }] });
+    expect({ result, expect: [{ a: 'a' }, { a: 'b' }, { a: 1 }] });
   });
 };

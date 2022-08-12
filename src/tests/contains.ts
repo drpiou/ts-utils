@@ -1,7 +1,7 @@
 'use strict';
 
 import { contains } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'contains', () => {
@@ -10,8 +10,8 @@ export default (app: HTMLDivElement): void => {
     const resultTrue = contains(source, (value) => value === 'b');
     const resultFalse = contains(source, (value) => value === 5);
 
-    testThis({ source, expect: ['a', 'b', 1] });
-    testThis({ resultTrue, expect: true });
-    testThis({ resultFalse, expect: false });
+    expect({ source, expect: ['a', 'b', 1] });
+    expect({ resultTrue, expect: true });
+    expect({ resultFalse, expect: false });
   });
 };

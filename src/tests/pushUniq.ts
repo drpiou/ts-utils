@@ -1,7 +1,7 @@
 'use strict';
 
 import { pushUniq } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'pushUniq', () => {
@@ -9,7 +9,7 @@ export default (app: HTMLDivElement): void => {
 
     const result = pushUniq(source, 'a', 'z', 2);
 
-    testThis({ source, expect: ['a', 'b', 1, 'z', 2] });
-    testThis({ result, expect: ['a', 'b', 1, 'z', 2] });
+    expect({ source, expect: ['a', 'b', 1, 'z', 2] });
+    expect({ result, expect: ['a', 'b', 1, 'z', 2] });
   });
 };

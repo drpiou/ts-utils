@@ -1,7 +1,7 @@
 'use strict';
 
 import { max } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'max', () => {
@@ -11,9 +11,9 @@ export default (app: HTMLDivElement): void => {
     const resultA = max(sourceA);
     const resultB = max(sourceB, 'a');
 
-    testThis({ sourceA, expect: ['a', 'b', 1, 2] });
-    testThis({ sourceB, expect: [{ a: 'a' }, { a: 'b' }, { a: 1 }, { a: 2 }] });
-    testThis({ resultA, expect: 2 });
-    testThis({ resultB, expect: 2 });
+    expect({ sourceA, expect: ['a', 'b', 1, 2] });
+    expect({ sourceB, expect: [{ a: 'a' }, { a: 'b' }, { a: 1 }, { a: 2 }] });
+    expect({ resultA, expect: 2 });
+    expect({ resultB, expect: 2 });
   });
 };

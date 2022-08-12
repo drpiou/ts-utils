@@ -1,7 +1,7 @@
 'use strict';
 
 import { pad } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'pad', () => {
@@ -10,8 +10,8 @@ export default (app: HTMLDivElement): void => {
     const resultA = pad(source, 6, 0);
     const resultB = pad(source, -6, 0);
 
-    testThis({ source, expect: ['a', 'b', 1] });
-    testThis({ resultA, expect: ['a', 'b', 1, 0, 0, 0] });
-    testThis({ resultB, expect: [0, 0, 0, 'a', 'b', 1] });
+    expect({ source, expect: ['a', 'b', 1] });
+    expect({ resultA, expect: ['a', 'b', 1, 0, 0, 0] });
+    expect({ resultB, expect: [0, 0, 0, 'a', 'b', 1] });
   });
 };

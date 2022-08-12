@@ -31,7 +31,7 @@ export const test = async (app: HTMLDivElement, title: string, callback: () => v
   }
 };
 
-export const testThis = (that: { [key: string]: unknown; expect: unknown }): void => {
+export const expect = (that: { [key: string]: unknown; expect: unknown }): void => {
   const value = head(values(omit(that, ['expect'])));
 
   log(that);
@@ -40,10 +40,10 @@ export const testThis = (that: { [key: string]: unknown; expect: unknown }): voi
 };
 
 const testValue = (value: unknown, expectedValue: unknown): void => {
-  expect(typeof value, typeof expectedValue);
+  testThrow(typeof value, typeof expectedValue);
 
   if (Array.isArray(value) && Array.isArray(expectedValue)) {
-    expect(value.length, expectedValue.length);
+    testThrow(value.length, expectedValue.length);
 
     expectedValue.map((expectedValueAtIndex, index) => {
       testValue(value[index], expectedValueAtIndex);
@@ -53,11 +53,11 @@ const testValue = (value: unknown, expectedValue: unknown): void => {
       testValue((value as never)[expectedValueKeysAtIndex], (expectedValue as never)[expectedValueKeysAtIndex]);
     });
   } else {
-    expect(value, expectedValue);
+    testThrow(value, expectedValue);
   }
 };
 
-const expect = (value: unknown, expectedValue: unknown): void => {
+const testThrow = (value: unknown, expectedValue: unknown): void => {
   if (value !== expectedValue) {
     const message = `expect: ${String(expectedValue)}; got: ${String(value)}`;
 

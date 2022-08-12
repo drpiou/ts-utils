@@ -1,7 +1,7 @@
 'use strict';
 
 import { entries } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'entries', () => {
@@ -9,8 +9,8 @@ export default (app: HTMLDivElement): void => {
 
     const result = entries(source);
 
-    testThis({ source, expect: ['a', 'b', 1] });
-    testThis({
+    expect({ source, expect: ['a', 'b', 1] });
+    expect({
       result,
       expect: [
         [0, 'a'],

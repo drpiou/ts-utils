@@ -1,7 +1,7 @@
 'use strict';
 
 import { keys } from '../../lib';
-import { test, testThis } from './test';
+import { test, expect } from './test';
 
 export default (app: HTMLDivElement): void => {
   void test(app, 'keys', () => {
@@ -9,7 +9,7 @@ export default (app: HTMLDivElement): void => {
 
     const result = keys(source);
 
-    testThis({ source, expect: ['a', 'b', 1] });
-    testThis({ result, expect: [0, 1, 2] });
+    expect({ source, expect: ['a', 'b', 1] });
+    expect({ result, expect: [0, 1, 2] });
   });
 };
