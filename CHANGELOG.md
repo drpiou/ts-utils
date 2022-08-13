@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.0.3] - 2022-08-14
+
+### Added
+
+- examples
+
+### Changed
+
+- rewritten using vite
+
+### Fixed
+
+- import package in project
+- some typings
+
 ## [0.0.2] - 2022-07-11
 
 ### Added
@@ -18,6 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - first commit
 
-[Unreleased]: https://github.com/drpiou/ts-utils/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/drpiou/ts-utils/compare/v0.0.3...HEAD
+[0.0.3]: https://github.com/drpiou/ts-utils/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/drpiou/ts-utils/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/drpiou/ts-utils/releases/tag/v0.0.1
