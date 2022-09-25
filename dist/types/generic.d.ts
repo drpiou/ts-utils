@@ -1,8 +1,8 @@
 export declare type DeepPartial<T> = {
-    [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+    [P in keyof T]?: T[P] extends Array<infer U> ? Array<DeepPartial<U>> : T[P] extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : DeepPartial<T[P]>;
 };
 export declare type DeepReadonly<T> = {
-    readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
+    readonly [P in keyof T]: T[P] extends Array<infer U> ? Array<DeepReadonly<U>> : T[P] extends ReadonlyArray<infer U> ? ReadonlyArray<DeepReadonly<U>> : DeepReadonly<T[P]>;
 };
 export declare type DeepRecord<K extends keyof any, T> = {
     [P in K]: DeepRecord<K, T> | T;

@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.0.4] - 2022-09-25
+
+### Changed
+
+- DeepPartial
+- DeepReadonly
+
 ## [0.0.3] - 2022-08-14
 
 ### Added
@@ -33,7 +40,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - first commit
 
-[Unreleased]: https://github.com/drpiou/ts-utils/compare/v0.0.3...HEAD
+[Unreleased]: https://github.com/drpiou/ts-utils/compare/v0.0.4...HEAD
+[0.0.4]: https://github.com/drpiou/ts-utils/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/drpiou/ts-utils/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/drpiou/ts-utils/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/drpiou/ts-utils/releases/tag/v0.0.1

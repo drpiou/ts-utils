@@ -630,23 +630,31 @@ const result = withoutProperties({ a: 1, b: 2 }, ['b']);
 #### `DeepPartial`
 
 ```typescript
-type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer U>
+    ? Array<DeepPartial<U>>
+    : T[P] extends ReadonlyArray<infer U>
+    ? ReadonlyArray<DeepPartial<U>>
+    : DeepPartial<T[P]>;
 };
 ```
 
 #### `DeepReadonly`
 
 ```typescript
-type DeepReadonly<T> = {
-  readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
+export type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends Array<infer U>
+    ? Array<DeepReadonly<U>>
+    : T[P] extends ReadonlyArray<infer U>
+    ? ReadonlyArray<DeepReadonly<U>>
+    : DeepReadonly<T[P]>;
 };
 ```
 
 #### `DeepRecord`
 
 ```typescript
-type DeepRecord<K extends keyof any, T> = {
+export type DeepRecord<K extends keyof any, T> = {
   [P in K]: DeepRecord<K, T> | T;
 };
 ```
@@ -654,13 +662,13 @@ type DeepRecord<K extends keyof any, T> = {
 #### `Index`
 
 ```typescript
-type Index = string | number | symbol;
+export type Index = string | number | symbol;
 ```
 
 #### `NonNullableField`
 
 ```typescript
-type NonNullableField<T extends object> = {
+export type NonNullableField<T extends object> = {
   [P in keyof T]-?: NonNullable<T[P]>;
 };
 ```
@@ -668,7 +676,7 @@ type NonNullableField<T extends object> = {
 #### `PartialRecord`
 
 ```typescript
-type PartialRecord<K extends keyof any, T> = {
+export type PartialRecord<K extends keyof any, T> = {
   [P in K]?: T;
 };
 ```
@@ -684,19 +692,19 @@ See [typescriptlang.org](https://www.typescriptlang.org/play?ts=4.1.0-pr-40336-8
 #### `Primitive`
 
 ```typescript
-type Primitive = string | number | boolean | undefined | null;
+export type Primitive = string | number | boolean | undefined | null;
 ```
 
 #### `ValueOf`
 
 ```typescript
-type ValueOf<T> = T extends any[] ? T[number] : T[keyof T];
+export type ValueOf<T> = T extends any[] ? T[number] : T[keyof T];
 ```
 
 #### `Without`
 
 ```typescript
-type Without<T extends string> = {
+export type Without<T extends string> = {
   [P in T]?: never;
 };
 ```
