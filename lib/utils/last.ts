@@ -1,4 +1,4 @@
-import { BooleanClosure } from '../types/collection';
+export type LastClosure<Item> = (item: Item, index: number) => boolean;
 
 /**
  * Return the last item that passes a given truth test in the source array.
@@ -12,7 +12,7 @@ import { BooleanClosure } from '../types/collection';
  * @param closure Callback function.
  * @returns any
  */
-const last = <S>(source: S[], closure?: BooleanClosure<S>): S | undefined => {
+const last = <S>(source: S[], closure?: LastClosure<S>): S | undefined => {
   const c = source.length;
   const ci = c - 1;
 

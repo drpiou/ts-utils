@@ -1,4 +1,4 @@
-import { ChunkClosure } from '../types/collection';
+export type ChunkClosure<Item> = (item: Item, index: number, chunk: Item[]) => boolean;
 
 /**
  * Break the source array into smaller arrays.
@@ -9,19 +9,18 @@ import { ChunkClosure } from '../types/collection';
  * @param closure Callback function.
  * @returns Array
  */
-const chunkWhile = <I>(source: I[], closure: ChunkClosure<I>): I[][] => {
-  const result: I[][] = [];
+export default function chunkWhile<Item>(source: Item[], closure: ChunkClosure<Item>): Item[][] {
+  const result: Item[][] = [];
 
-  let chunk: I[] = [];
+  const count = source.length;
 
-  const c = source.length;
+  let index = 0;
+  let chunk: Item[] = [];
 
-  let i = 0;
+  while (index < count) {
+    const item = source[index];
 
-  while (i < c) {
-    const item = source[i];
-
-    if (closure(item, i, chunk)) {
+    if (closure(item, index, chunk)) {
       result.push([...chunk]);
 
       chunk = [];
@@ -29,12 +28,10 @@ const chunkWhile = <I>(source: I[], closure: ChunkClosure<I>): I[][] => {
 
     chunk.push(item);
 
-    i++;
+    index++;
   }
 
   result.push(chunk);
 
   return result;
-};
-
-export default chunkWhile;
+}

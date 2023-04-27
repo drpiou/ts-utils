@@ -1,4 +1,4 @@
-import { BooleanClosure } from '../types/collection';
+export type PartitionClosure<Item> = (item: Item, index: number) => boolean;
 
 /**
  * Separate items that pass a given truth test in the source array.
@@ -9,7 +9,7 @@ import { BooleanClosure } from '../types/collection';
  * @param closure Callback function. If returns true, item is put on left, otherwise on right.
  * @returns Array
  */
-const partition = <S>(source: S[], closure: BooleanClosure<S>): S[][] => {
+const partition = <S>(source: S[], closure: PartitionClosure<S>): S[][] => {
   const itemsLeft = [];
   const itemsRight = [];
 

@@ -1,4 +1,4 @@
-import { BooleanClosure } from '../types/collection';
+export type FirstClosure<Item> = (item: Item, index: number) => boolean;
 
 /**
  * Return the first item that passes a given truth test in the source array.
@@ -12,7 +12,7 @@ import { BooleanClosure } from '../types/collection';
  * @param closure Callback function.
  * @returns any
  */
-const first = <S>(source: S[], closure?: BooleanClosure<S>): S | undefined => {
+const first = <S>(source: S[], closure?: FirstClosure<S>): S | undefined => {
   if (!closure) {
     return source[0];
   }

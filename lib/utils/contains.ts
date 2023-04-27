@@ -1,4 +1,4 @@
-import { BooleanClosure } from '../types/collection';
+export type ContainsClosure<Item> = (item: Item, index: number) => boolean;
 
 /**
  * Return whether the given item exists in the source array.
@@ -7,20 +7,18 @@ import { BooleanClosure } from '../types/collection';
  * @param closure Callback function.
  * @returns boolean
  */
-const contains = <S>(source: S[], closure: BooleanClosure<S>): boolean => {
-  const c = source.length;
+export default function contains<Item>(source: Item[], closure: ContainsClosure<Item>): boolean {
+  const count = source.length;
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    if (closure(source[i], i)) {
+  while (index < count) {
+    if (closure(source[index], index)) {
       return true;
     }
 
-    i++;
+    index++;
   }
 
   return false;
-};
-
-export default contains;
+}

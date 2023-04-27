@@ -1,4 +1,4 @@
-import { BooleanClosure } from '../types/collection';
+export type EveryClosure<Item> = (item: Item, index: number) => boolean;
 
 /**
  * Verify that all items pass a given truth test in the source array.
@@ -7,20 +7,18 @@ import { BooleanClosure } from '../types/collection';
  * @param closure Callback function.
  * @returns boolean
  */
-const every = <S>(source: S[], closure: BooleanClosure<S>): boolean => {
-  const c = source.length;
+export default function every<Item>(source: Item[], closure: EveryClosure<Item>): boolean {
+  const count = source.length;
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    if (!closure(source[i], i)) {
+  while (index < count) {
+    if (!closure(source[index], index)) {
       return false;
     }
 
-    i++;
+    index++;
   }
 
   return true;
-};
-
-export default every;
+}

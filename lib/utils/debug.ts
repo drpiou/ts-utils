@@ -1,8 +1,12 @@
-import { DebugOptions } from '../types/debug';
 import log from './log';
 import logError from './logError';
 import logInfo from './logInfo';
 import logWarn from './logWarn';
+
+export type DebugOptions = {
+  active: boolean;
+  transform: (param: unknown) => unknown;
+};
 
 const DEFAULT_OPTIONS: DebugOptions = {
   active: true,

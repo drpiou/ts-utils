@@ -1,10 +1,13 @@
-import { Path } from '../types/generic';
+export declare type PathsOptions = {
+    objectParent?: boolean;
+    parent?: string;
+};
 /**
  * Return all the paths in dot notation of the source object.
  *
  * @param source Source object.
- * @param parent Parent key.
+ * @param options Options.
  * @returns Array
  */
-declare const paths: <S extends object>(source: S, parent?: string) => Path<S>[];
+declare const paths: <S extends object>(source: S, options?: PathsOptions | undefined) => string[];
 export default paths;
