@@ -1,4 +1,4 @@
-export type FilterClosure<Item> = (item: Item, index: number, empty: () => Reject) => Item | Reject;
+export type FilterClosure<Item> = (item: Item, index: number, reject: () => Reject) => Item | Reject;
 
 type Reject = typeof rejectSymbol;
 
@@ -6,7 +6,7 @@ const rejectSymbol = Object.freeze({
   __reject: Symbol('reject'),
 });
 
-const reject = () => {
+const reject = (): Reject => {
   return rejectSymbol;
 };
 

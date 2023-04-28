@@ -1,4 +1,4 @@
-import joinWords, { JoinWordsOptions } from './joinWords';
+import join, { JoinOptions } from './join';
 
 /**
  * Join key-paired items in a source array.
@@ -11,12 +11,15 @@ import joinWords, { JoinWordsOptions } from './joinWords';
  * @param options Separator options.
  * @returns string
  */
-const joinBy = <S extends object>(source: S[], key: keyof S, separator?: string, options?: JoinWordsOptions): string => {
-  return joinWords(
+export default function joinBy<Source extends Record<string, any>>(
+  source: Source[],
+  key: keyof Source,
+  separator?: string,
+  options?: JoinOptions,
+): string {
+  return join(
     source.map((item) => String(item[key])),
     separator,
     options,
   );
-};
-
-export default joinBy;
+}

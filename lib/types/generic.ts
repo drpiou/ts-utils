@@ -2,11 +2,11 @@ export type CastArray<T> = T extends any[] ? T : T[];
 
 export type Constructor<T = any> = new (...args: any[]) => T;
 
-export type FlattenDeep<T extends any[]> = T extends [infer First, ...infer Rest]
-  ? First extends unknown[]
-    ? FlattenDeep<[...First, ...FlattenDeep<Rest>]>
-    : [First, ...FlattenDeep<Rest>]
-  : [];
+export type FlattenDeep<T> = T extends any[] ? FlattenDeep<T[number]> : T;
+
+// type FlattenDeepRecursive<T extends any[], U extends T[number]> = U extends any[] ? FlattenDeepRecursive<U, U[number]> : U;
+//
+// export type FlattenDeep<T extends any[]> = FlattenDeepRecursive<T, T[number]>;
 
 export type PartialDeep<T> = {
   [P in keyof T]?: T[P] extends Array<infer U>

@@ -11,7 +11,7 @@ import { Path, PathFinite } from '../types/path';
  */
 export default function paths<
   Source extends Record<string, any>,
-  Finite extends boolean,
+  Finite extends boolean = false,
   Return = Finite extends true ? PathFinite<Source> : Path<Source>,
 >(source: Source, finite?: Finite, prefix?: string): (Return | string)[] {
   const result: string[] = [];

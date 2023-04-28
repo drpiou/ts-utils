@@ -1,14 +1,18 @@
-import { expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import every from './every';
 
-test('every', () => {
+describe('every', () => {
   const source = ['a', 'b', 1];
 
-  const resultTrue = every(source, (value) => ['string', 'number'].includes(typeof value));
+  test('true', () => {
+    const result = every(source, (value) => ['string', 'number'].includes(typeof value));
 
-  expect(resultTrue).toBe(true);
+    expect(result).toBe(true);
+  });
 
-  const resultFalse = every(source, (value) => ['string'].includes(typeof value));
+  test('false', () => {
+    const result = every(source, (value) => ['string'].includes(typeof value));
 
-  expect(resultFalse).toBe(false);
+    expect(result).toBe(false);
+  });
 });

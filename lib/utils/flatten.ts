@@ -1,3 +1,5 @@
+import { FlattenDeep } from '../types/generic';
+
 /**
  * Flatten the source array.
  *
@@ -7,8 +9,11 @@
  * @param deep Flatten recursively.
  * @returns Array
  */
-const flatten = <I>(source: unknown[], deep?: boolean): I[] => {
-  const result: I[] = [];
+export default function flatten<Item, Deep extends boolean = false, Return = Deep extends true ? FlattenDeep<Item>[] : Item[]>(
+  source: Item[],
+  deep?: Deep,
+): Return {
+  const result = [];
 
   const c = source.length;
 
@@ -17,12 +22,10 @@ const flatten = <I>(source: unknown[], deep?: boolean): I[] => {
   while (i < c) {
     const item = source[i];
 
-    result.push(...((Array.isArray(item) ? (deep ? flatten(item) : item) : [item]) as I[]));
+    result.push(...((Array.isArray(item) ? (deep ? flatten(item) : item) : [item]) as Item[]));
 
     i++;
   }
 
-  return result;
-};
-
-export default flatten;
+  return result as Return;
+}

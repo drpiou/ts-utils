@@ -1,4 +1,9 @@
-import joinWords, { JoinWordsOptions } from './joinWords';
+import clone from './clone';
+
+export type JoinOptions = {
+  first?: string;
+  last?: string;
+};
 
 /**
  * Join items in a source array.
@@ -10,12 +15,19 @@ import joinWords, { JoinWordsOptions } from './joinWords';
  * @param options Separator options.
  * @returns string
  */
-const join = <S>(source: S[], separator?: string, options?: JoinWordsOptions): string => {
-  return joinWords(
-    source.map((item) => String(item)),
-    separator,
-    options,
-  );
-};
+export default function join(source: string[], separator?: string, options?: JoinOptions): string {
+  const count = source.length;
 
-export default join;
+  const middleSeparator = separator ?? '';
+  const firstSeparator = options?.first ?? (count <= 2 ? options?.last : undefined) ?? middleSeparator;
+  const lastSeparator = count <= 2 ? '' : options?.last ?? middleSeparator;
+
+  const parts = clone(source);
+
+  const firstPart = parts.shift();
+  const lastPart = parts.pop();
+
+  return `${firstPart !== undefined ? `${firstPart}${firstSeparator}` : ''}${parts.join(middleSeparator)}${
+    lastPart !== undefined ? `${lastSeparator}${lastPart}` : ''
+  }`;
+}

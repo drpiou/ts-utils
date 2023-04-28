@@ -9,8 +9,6 @@ import clone from './clone';
  * @param source Source array.
  * @returns Array
  */
-const invert = <S>(source: S[]): S[] => {
+export default function invert<Item>(source: Item[]): Item[] {
   return clone(source).reverse();
-};
-
-export default invert;
+}

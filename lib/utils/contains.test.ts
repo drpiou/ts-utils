@@ -1,14 +1,18 @@
-import { expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import contains from './contains';
 
-test('contains', () => {
+describe('contains', () => {
   const source = ['a', 'b', 1];
 
-  const resultTrue = contains(source, (value) => value === 'b');
+  test('true', () => {
+    const result = contains(source, (value) => value === 'b');
 
-  expect(resultTrue).toBe(true);
+    expect(result).toBe(true);
+  });
 
-  const resultFalse = contains(source, (value) => value === 5);
+  test('false', () => {
+    const result = contains(source, (value) => value === 5);
 
-  expect(resultFalse).toBe(false);
+    expect(result).toBe(false);
+  });
 });

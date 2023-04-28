@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - `append` accepts any type of new items
 - `filter` callback must return value or rejection
+- `first` callback must return value or rejection
 - `max` only accepts array of numbers
 - `min` only accepts array of numbers
 - `path` second parameters is an options literal object

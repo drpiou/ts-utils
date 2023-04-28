@@ -61,4 +61,4 @@ export { default as take } from './utils/take';
 export { default as uniq } from './utils/uniq';
 export { default as uniqBy } from './utils/uniqBy';
 export { default as usleep } from './utils/usleep';
-export { default as withoutProperties } from './utils/withoutProperties';
+export { default as withoutProperties } from './utils/omit';

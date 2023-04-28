@@ -1,4 +1,14 @@
-export type FirstClosure<Item> = (item: Item, index: number) => boolean;
+export type FirstClosure<Item> = (item: Item, index: number, reject: () => Reject) => Item | Reject;
+
+type Reject = typeof rejectSymbol;
+
+const rejectSymbol = Object.freeze({
+  __reject: Symbol('reject'),
+});
+
+const reject = (): Reject => {
+  return rejectSymbol;
+};
 
 /**
  * Return the first item that passes a given truth test in the source array.
@@ -12,26 +22,30 @@ export type FirstClosure<Item> = (item: Item, index: number) => boolean;
  * @param closure Callback function.
  * @returns any
  */
-const first = <S>(source: S[], closure?: FirstClosure<S>): S | undefined => {
+export default function first<Item, Closure extends FirstClosure<Item>, Return = Extract<ReturnType<Closure>, Item>>(
+  source: Item[],
+  closure?: Closure,
+): Return | undefined {
   if (!closure) {
-    return source[0];
+    return source[0] as unknown as Return;
   }
 
-  const c = source.length;
+  const count = source.length;
 
-  let i = 0;
+  let index = 0;
+  let result;
 
-  while (i < c) {
-    const item = source[i];
+  while (index < count) {
+    const item = source[index];
 
-    if (closure(item, i)) {
-      return item;
+    if (closure(item, index, reject) === item) {
+      result = item as unknown as Return;
+
+      break;
     }
 
-    i++;
+    index++;
   }
 
-  return;
-};
-
-export default first;
+  return result;
+}

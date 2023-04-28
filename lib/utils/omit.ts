@@ -5,7 +5,7 @@
  * @param keys Keys to remove.
  * @returns Object
  */
-const withoutProperties = <S extends object, K extends string>(source: S, keys: K[]): Omit<S, K> => {
+const omit = <S extends object, K extends string>(source: S, keys: K[]): Omit<S, K> => {
   const result: Omit<S, K> = {} as never;
 
   const sourceKeys = Object.keys(source) as (keyof S)[];
@@ -31,4 +31,4 @@ const withoutProperties = <S extends object, K extends string>(source: S, keys: 
   return result;
 };
 
-export default withoutProperties;
+export default omit;
