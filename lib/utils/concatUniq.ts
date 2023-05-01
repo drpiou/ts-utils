@@ -13,7 +13,7 @@ import pushUniq from './pushUniq';
 export default function concatUniq<Item, Items extends unknown[]>(source: Item[], ...items: Items[]): (Item | Items[number])[] {
   const count = items.length;
 
-  const result: Item[] = clone(source);
+  const result = clone(source);
 
   let index = 0;
 

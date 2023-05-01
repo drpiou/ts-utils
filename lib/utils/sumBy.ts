@@ -1,21 +1,21 @@
 import { PickByValue } from 'utility-types';
 
-export type MaxByIterateeFunction<Item extends Record<string, any>> = (item: Item, index: number) => number;
+export type SumByIterateeFunction<Item extends Record<string, any>> = (item: Item, index: number) => number;
 
-export type MaxByIterateeProperty<Item extends Record<string, any>> = keyof PickByValue<Item, number>;
+export type SumByIterateeProperty<Item extends Record<string, any>> = keyof PickByValue<Item, number>;
 
-export type MaxByIteratee<Item extends Record<string, any>> = MaxByIterateeProperty<Item> | MaxByIterateeFunction<Item>;
+export type SumByIteratee<Item extends Record<string, any>> = SumByIterateeProperty<Item> | SumByIterateeFunction<Item>;
 
 /**
- * Return the maximum value of the items in the source array.
+ * Return the sum of the items in the source array.
  *
  * @param source Source array.
  * @param iteratee Item iteratee.
  * @returns number
  */
-export default function maxBy<Item extends Record<string, any>>(
+export default function sumBy<Item extends Record<string, any>>(
   source: Item[],
-  iteratee: MaxByIteratee<Item> | string,
+  iteratee: SumByIteratee<Item> | string,
 ): number | undefined {
   const count = source.length;
 
@@ -23,7 +23,7 @@ export default function maxBy<Item extends Record<string, any>>(
     return undefined;
   }
 
-  const parser: MaxByIterateeFunction<Item> =
+  const parser: SumByIterateeFunction<Item> =
     typeof iteratee === 'function' ? (s, i) => iteratee(s, i) : (s) => Number(s[iteratee]);
 
   let result = parser(source[0], 0);
@@ -39,9 +39,9 @@ export default function maxBy<Item extends Record<string, any>>(
 
     if (isNaN(value)) {
       return undefined;
-    } else if (value > result) {
-      result = value;
     }
+
+    result = value + result;
 
     index++;
   }

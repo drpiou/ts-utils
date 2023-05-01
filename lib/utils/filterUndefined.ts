@@ -9,7 +9,7 @@ import filter from './filter';
  * @returns Array
  */
 export default function filterUndefined<Item>(source: Item[]): Exclude<Item, undefined>[] {
-  return filter(source, (value, _index, reject) => {
-    return value === undefined ? reject() : value;
+  return filter<Item, Exclude<Item, undefined>>(source, (value, _index, reject) => {
+    return value === undefined ? reject : value;
   });
 }

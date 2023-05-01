@@ -13,7 +13,7 @@ export default function keys<Item extends any[] | Record<string, any>, Result = 
 
   const count = source.length;
 
-  const result: Result[] = [];
+  const result = [];
 
   let index = 0;
 

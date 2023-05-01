@@ -10,6 +10,6 @@ import filter from './filter';
  */
 export default function filterNull<Item>(source: Item[]): Exclude<Item, null>[] {
   return filter<Item, Exclude<Item, null>>(source, (value, _index, reject) => {
-    return value === null ? reject() : value;
+    return value === null ? reject : value;
   });
 }

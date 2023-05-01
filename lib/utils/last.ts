@@ -1,14 +1,8 @@
-export type LastClosure<Item> = (item: Item, index: number, reject: () => Reject) => Item | Reject;
+export type LastClosure<Item> = (item: Item, index: number, reject: Reject) => Item | Reject;
 
-type Reject = typeof rejectSymbol;
+type Reject = { __reject: symbol };
 
-const rejectSymbol = Object.freeze({
-  __reject: Symbol('reject'),
-});
-
-const reject = (): Reject => {
-  return rejectSymbol;
-};
+const reject: Reject = Object.freeze({ __reject: Symbol('reject') });
 
 /**
  * Return the last item that passes a given truth test in the source array.
@@ -22,10 +16,11 @@ const reject = (): Reject => {
  * @param closure Callback function.
  * @returns any
  */
-export default function last<Item, Closure extends LastClosure<Item>, Result = Extract<ReturnType<Closure>, Item>>(
-  source: Item[],
-  closure?: Closure,
-): Result | undefined {
+export default function last<
+  Item,
+  Result extends Extract<ReturnType<Closure>, Item>,
+  Closure extends LastClosure<Item> = LastClosure<Item>,
+>(source: Item[], closure?: Closure): Result | undefined {
   const count = source.length;
 
   if (!closure) {

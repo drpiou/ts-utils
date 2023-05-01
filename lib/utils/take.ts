@@ -7,8 +7,6 @@
  * @param count Count.
  * @returns Array
  */
-const take = <S>(source: S[], count: number): S[] => {
-  return source.slice(0, count);
-};
-
-export default take;
+export default function take<Item>(source: Item[], count: number): Item[] {
+  return count >= 0 ? source.slice(0, count) : source.slice(count);
+}

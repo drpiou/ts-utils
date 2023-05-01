@@ -4,10 +4,10 @@ import maxBy from './maxBy';
 describe('maxBy', () => {
   const source = [
     { a: 1, b: '1' },
-    { a: 3, b: '3' },
-    { a: 2, b: '2' },
-    { a: 4, b: '4' },
-    { a: 0, b: '0' },
+    { a: 3, b: 'NaN' },
+    { a: 2, b: 'NaN' },
+    { a: 4, b: 'NaN' },
+    { a: 0, b: 'NaN' },
   ];
 
   test('empty', () => {
@@ -18,13 +18,13 @@ describe('maxBy', () => {
     expect(result).toBe(undefined);
   });
 
-  test('values:key', () => {
+  test('key', () => {
     const result = maxBy(source, 'a');
 
     expect(result).toBe(4);
   });
 
-  test('values:callback', () => {
+  test('function', () => {
     const result = maxBy(source, (item) => {
       return item.a;
     });
@@ -32,9 +32,17 @@ describe('maxBy', () => {
     expect(result).toBe(4);
   });
 
-  test('values:nan', () => {
-    const result = maxBy(source, () => {
-      return Number('NaN');
+  test('nan:first', () => {
+    const result = maxBy([{ a: 0, b: 'NaN' }, ...source], (item) => {
+      return Number(item.b);
+    });
+
+    expect(result).toBe(undefined);
+  });
+
+  test('nan:rest', () => {
+    const result = maxBy(source, (item) => {
+      return Number(item.b);
     });
 
     expect(result).toBe(undefined);

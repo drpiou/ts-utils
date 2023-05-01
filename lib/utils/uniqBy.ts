@@ -7,9 +7,9 @@
  * @param key Item key.
  * @returns Array
  */
-const uniqBy = <S extends object, K extends keyof S>(source: S[], key: K): S[] => {
-  const result: S[] = [];
-  const resultKeys: S[K][] = [];
+export default function uniqBy<Item extends object, Key extends keyof Item>(source: Item[], key: Key | string): Item[] {
+  const result = [];
+  const resultKeys = [] as Item[Key][];
 
   const c = source.length;
 
@@ -17,17 +17,18 @@ const uniqBy = <S extends object, K extends keyof S>(source: S[], key: K): S[] =
 
   while (i < c) {
     const item = source[i];
-    const itemKey = item[key];
 
-    if (resultKeys.indexOf(itemKey)) {
-      result.push(item);
-      resultKeys.push(itemKey);
+    if (key in item) {
+      const itemKey = item[key as Key];
+
+      if (resultKeys.indexOf(itemKey) === -1) {
+        result.push(item);
+        resultKeys.push(itemKey);
+      }
     }
 
     i++;
   }
 
   return result;
-};
-
-export default uniqBy;
+}

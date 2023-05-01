@@ -5,9 +5,9 @@
  * @param keys Keys to remove.
  * @returns Object
  */
-export default function omit<Item extends Record<string, any>, Keys extends keyof Item, Key extends Keys | string>(
+export default function omit<Item extends Record<string, any>, Keys extends keyof Item, Key extends Keys>(
   source: Item,
-  keys: Key[],
+  keys: (Key | string)[],
 ): Omit<Item, Key> {
   const result = {} as Omit<Item, Key>;
 

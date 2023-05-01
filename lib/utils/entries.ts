@@ -7,7 +7,7 @@
 export default function entries<Item>(source: Item[]): [number, Item][] {
   const count = source.length;
 
-  const result: [number, Item][] = [];
+  const result = [] as [number, Item][];
 
   let index = 0;
 

@@ -7,22 +7,20 @@
  * @param items Items to add.
  * @returns Collection
  */
-const pushUniq = <S>(source: S[], ...items: S[]): S[] => {
-  const c = Number(items.length);
+export default function pushUniq<Item>(source: Item[], ...items: Item[]): Item[] {
+  const count = Number(items.length);
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    const item = items[i];
+  while (index < count) {
+    const item = items[index];
 
     if (source.indexOf(item) === -1) {
       source.push(item);
     }
 
-    i++;
+    index++;
   }
 
   return source;
-};
-
-export default pushUniq;
+}

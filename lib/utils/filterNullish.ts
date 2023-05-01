@@ -9,7 +9,7 @@ import filter from './filter';
  * @returns Array
  */
 export default function filterNullish<Item>(source: Item[]): Exclude<Item, null | undefined>[] {
-  return filter(source, (value, _index, reject) => {
-    return value === null || value === undefined ? reject() : value;
+  return filter<Item, Exclude<Item, null | undefined>>(source, (value, _index, reject) => {
+    return value === null || value === undefined ? reject : value;
   });
 }

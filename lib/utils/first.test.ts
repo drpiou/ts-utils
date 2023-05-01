@@ -12,7 +12,7 @@ describe('first', () => {
 
   test('value', () => {
     const result = first(source, (value, _index, reject) => {
-      return typeof value === 'number' ? value : reject();
+      return typeof value === 'number' ? value : reject;
     });
 
     expect(result).toBe(1);
@@ -20,7 +20,7 @@ describe('first', () => {
 
   test('index', () => {
     const result = first(source, (value, index, reject) => {
-      return index === 0 ? value : reject();
+      return index === 0 ? value : reject;
     });
 
     expect(result).toBe('a');
@@ -28,7 +28,7 @@ describe('first', () => {
 
   test('null', () => {
     const result = first(source, (value, _index, reject) => {
-      return value === null ? value : reject();
+      return value === null ? value : reject;
     });
 
     expect(result).toBe(null);
@@ -36,7 +36,7 @@ describe('first', () => {
 
   test('undefined', () => {
     const result = first(source, (value, _index, reject) => {
-      return value === 'undefined' ? value : reject();
+      return value === 'undefined' ? value : reject;
     });
 
     expect(result).toBe(undefined);

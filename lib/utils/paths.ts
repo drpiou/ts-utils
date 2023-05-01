@@ -14,7 +14,7 @@ export default function paths<
   Finite extends boolean = false,
   Result = Finite extends true ? PathFinite<Source> : Path<Source>,
 >(source: Source, finite?: Finite, prefix?: string): (Result | string)[] {
-  const result: string[] = [];
+  const result = [];
 
   const sourceEntries = Object.entries(source);
 
@@ -41,20 +41,4 @@ export default function paths<
   }
 
   return result as never;
-}
-
-const test = { a: 1, b: { c: 1, d: { e: 1 } } };
-
-const test_paths_0 = paths(test);
-const test_paths_1 = paths(test, true);
-const test_paths_2 = paths(test, false);
-
-if (test_paths_0.includes('')) {
-  //
-}
-if (test_paths_1.includes('')) {
-  //
-}
-if (test_paths_2.includes('')) {
-  //
 }

@@ -15,7 +15,7 @@ export default function flatten<Item, Deep extends boolean = false, Result = Dee
 ): Result[] {
   const count = source.length;
 
-  const result: Result[] = [];
+  const result = [];
 
   let index = 0;
 

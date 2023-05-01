@@ -12,10 +12,10 @@ export type ChunkPredicate<Item> = (item: Item, index: number, chunk: Item[]) =>
 export default function chunkWhile<Item>(source: Item[], predicate: ChunkPredicate<Item>): Item[][] {
   const count = source.length;
 
-  const result: Item[][] = [];
+  const result = [];
 
   let index = 0;
-  let chunk: Item[] = [];
+  let chunk = [];
 
   while (index < count) {
     const item = source[index];

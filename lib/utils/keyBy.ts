@@ -10,7 +10,7 @@ export type KeyByIteratee<Item extends Record<string, any>> = KeyByIterateePrope
  * Return the key-paired items of the source array.
  *
  * @param source Source array.
- * @param iteratee Item key.
+ * @param iteratee Item iteratee.
  * @returns Object
  */
 export default function keyBy<

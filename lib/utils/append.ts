@@ -12,10 +12,10 @@ import clone from './clone';
  * @param items Items to add.
  * @returns Array
  */
-export default function append<Item, Items extends any[]>(source: Item[], ...items: Items): (Item | Items[number])[] {
-  const result: Item[] = clone(source);
+export default function append<Item, Values extends any[]>(source: Item[], ...items: Values): (Item | Values[number])[] {
+  const result = clone(source);
 
-  result.push(...(items as Item[]));
+  result.push(...items);
 
   return result;
 }

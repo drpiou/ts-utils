@@ -13,7 +13,7 @@ export default function min(source: number[]): number | undefined {
 
   let result = source[0];
 
-  let index = 0;
+  let index = 1;
 
   while (index < count) {
     const value = source[index];

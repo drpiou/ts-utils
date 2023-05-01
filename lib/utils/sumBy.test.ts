@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
-import minBy from './minBy';
+import sumBy from './sumBy';
 
-describe('minBy', () => {
+describe('sumBy', () => {
   const source = [
     { a: 1, b: '1' },
     { a: 3, b: 'NaN' },
@@ -11,7 +11,7 @@ describe('minBy', () => {
   ];
 
   test('empty', () => {
-    const result = minBy([], () => {
+    const result = sumBy([], () => {
       return 0;
     });
 
@@ -19,21 +19,21 @@ describe('minBy', () => {
   });
 
   test('key', () => {
-    const result = minBy(source, 'a');
+    const result = sumBy(source, 'a');
 
-    expect(result).toBe(0);
+    expect(result).toBe(10);
   });
 
   test('function', () => {
-    const result = minBy(source, (item) => {
+    const result = sumBy(source, (item) => {
       return item.a;
     });
 
-    expect(result).toBe(0);
+    expect(result).toBe(10);
   });
 
   test('nan:first', () => {
-    const result = minBy([{ a: 0, b: 'NaN' }, ...source], (item) => {
+    const result = sumBy([{ a: 0, b: 'NaN' }, ...source], (item) => {
       return Number(item.b);
     });
 
@@ -41,7 +41,7 @@ describe('minBy', () => {
   });
 
   test('nan:rest', () => {
-    const result = minBy(source, (item) => {
+    const result = sumBy(source, (item) => {
       return Number(item.b);
     });
 

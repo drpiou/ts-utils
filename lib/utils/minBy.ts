@@ -28,6 +28,10 @@ export default function minBy<Item extends Record<string, any>>(
 
   let result = parser(source[0], 0);
 
+  if (isNaN(result)) {
+    return undefined;
+  }
+
   let index = 1;
 
   while (index < count) {

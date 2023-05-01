@@ -10,10 +10,8 @@
  * @param reversed Reverse order.
  * @returns Array
  */
-const sort = <S>(source: S[], reversed?: boolean): S[] => {
+export default function sort<Item>(source: Item[], reversed?: boolean): Item[] {
   return source.sort((a, b) => {
     return (reversed ? String(a) > String(b) : String(a) < String(b)) ? -1 : 1;
   });
-};
-
-export default sort;
+}

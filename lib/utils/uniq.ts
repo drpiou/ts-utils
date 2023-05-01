@@ -6,24 +6,22 @@
  * @param source Source array.
  * @returns Array
  */
-const uniq = <S>(source: S[]): S[] => {
-  const result: S[] = [];
+export default function uniq<Item>(source: Item[]): Item[] {
+  const count = source.length;
 
-  const c = source.length;
+  const result = [] as Item[];
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    const item = source[i];
+  while (index < count) {
+    const item = source[index];
 
-    if (result.indexOf(item)) {
+    if (result.indexOf(item) === -1) {
       result.push(item);
     }
 
-    i++;
+    index++;
   }
 
   return result;
-};
-
-export default uniq;
+}

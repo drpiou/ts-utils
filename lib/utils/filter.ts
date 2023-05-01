@@ -1,14 +1,8 @@
-export type FilterClosure<Item> = (item: Item, index: number, reject: () => Reject) => Item | Reject;
+export type FilterClosure<Item> = (item: Item, index: number, reject: Reject) => Item | Reject;
 
-type Reject = typeof rejectSymbol;
+type Reject = { __reject: symbol };
 
-const rejectSymbol = Object.freeze({
-  __reject: Symbol('reject'),
-});
-
-const reject = (): Reject => {
-  return rejectSymbol;
-};
+const reject: Reject = Object.freeze({ __reject: Symbol('reject') });
 
 /**
  * Filter the items that pass a given truth test from the source array.
@@ -26,7 +20,7 @@ export default function filter<
 >(source: Item[], closure: Closure): Result[] {
   const count = source.length;
 
-  const result: Result[] = [];
+  const result = [] as Result[];
 
   let index = 0;
 

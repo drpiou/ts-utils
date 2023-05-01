@@ -12,12 +12,10 @@ import clone from './clone';
  * @param items Items to add.
  * @returns Array
  */
-const prepend = <S>(source: S[], ...items: S[]): S[] => {
+export default function prepend<Item, Values extends any[]>(source: Item[], ...items: Values): (Item | Values[number])[] {
   const result = clone(source);
 
   result.unshift(...items);
 
   return result;
-};
-
-export default prepend;
+}
