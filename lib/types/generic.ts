@@ -26,25 +26,19 @@ export type FlattenDeep<T> = T extends any[] ? FlattenDeep<T[number]> : T;
 //     : ReadonlyDeep<T[P]>;
 // };
 
-// TODO:
-//  review
-export type RecordDeep<K extends Index, T> = {
-  [P in K]: RecordDeep<K, T> | T;
-};
-
 export type Index = keyof any;
 
 // TODO:
-//  review
-export type NonNullableField<T> = {
-  [P in keyof T]-?: NonNullable<T[P]>;
-};
+//  replace with utility-types/DeepRequired
+// export type NonNullableField<T> = {
+//   [P in keyof T]-?: NonNullable<T[P]>;
+// };
 
 // TODO:
-//  review
-export type PartialRecord<K extends Index, T> = {
-  [P in K]?: T;
-};
+//  replace with utility-types/DeepPartial
+// export type PartialRecord<K extends Index, T> = {
+//   [P in K]?: T;
+// };
 
 // TODO:
 //  replace with utility-types/Primitive
@@ -53,9 +47,3 @@ export type PartialRecord<K extends Index, T> = {
 // TODO:
 //  replace with utility-types/ValuesType
 // export type ValueOf<T> = T extends any[] ? T[number] : T[keyof T];
-
-// TODO:
-//  review
-export type Without<T extends Index> = {
-  [P in T]?: never;
-};

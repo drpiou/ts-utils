@@ -8,24 +8,15 @@ export type DebugOptions = {
   transform: (param: unknown) => unknown;
 };
 
-const DEFAULT_OPTIONS: DebugOptions = {
-  active: true,
-  transform: (param: unknown): unknown => {
-    return typeof param === 'object' ? JSON.parse(JSON.stringify(param)) : param;
-  },
-};
-
 /**
  * Debug provides a wrapper around log utilities.
  *
  * @returns Debug
  */
 export default class Debug {
-  private readonly options: DebugOptions;
+  #active: DebugOptions['active'] = true;
 
-  constructor(options?: Partial<DebugOptions>) {
-    this.options = { ...DEFAULT_OPTIONS, ...options };
-  }
+  #transform: DebugOptions['transform'] = (param) => param;
 
   /**
    * Active or inactive le log.
@@ -34,7 +25,7 @@ export default class Debug {
    * @returns void
    */
   setActive(active: boolean): void {
-    this.options.active = active;
+    this.#active = active;
   }
 
   /**
@@ -44,7 +35,7 @@ export default class Debug {
    * @returns void
    */
   setTransform(transform: (param: unknown) => unknown): void {
-    this.options.transform = transform;
+    this.#transform = transform;
   }
 
   /**
@@ -54,9 +45,9 @@ export default class Debug {
    * @param params Parameters to log.
    * @returns void
    */
-  private debug(method: (...params: any) => void, params: unknown[]): void {
-    if (this.options.active) {
-      method(...params.map(this.options.transform));
+  #debug(method: (...params: any) => void, params: unknown[]): void {
+    if (this.#active) {
+      method(...params.map(this.#transform));
     }
   }
 
@@ -67,7 +58,7 @@ export default class Debug {
    * @returns void
    */
   log(...params: unknown[]): void {
-    this.debug(log, params);
+    this.#debug(log, params);
   }
 
   /**
@@ -76,8 +67,8 @@ export default class Debug {
    * @param params Parameters to log.
    * @returns void
    */
-  info(...params: [string, ...unknown[]]): void {
-    this.debug(logInfo, params);
+  info(...params: unknown[]): void {
+    this.#debug(logInfo, params);
   }
 
   /**
@@ -86,8 +77,8 @@ export default class Debug {
    * @param params Parameters to log.
    * @returns void
    */
-  warn(...params: [string, ...unknown[]]): void {
-    this.debug(logWarn, params);
+  warn(...params: unknown[]): void {
+    this.#debug(logWarn, params);
   }
 
   /**
@@ -96,7 +87,7 @@ export default class Debug {
    * @param params Parameters to log.
    * @returns void
    */
-  error(...params: [string, ...unknown[]]): void {
-    this.debug(logError, params);
+  error(...params: unknown[]): void {
+    this.#debug(logError, params);
   }
 }

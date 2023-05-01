@@ -5,25 +5,18 @@ import pushUniq from './pushUniq';
  * Add the given items to the end of the source array.
  *
  * This function returns a new array.
+ * To mutate the source array, use the "Array.push" method.
+ *
+ * For the inverse, see the "prepend" function.
  *
  * @param source Source array.
  * @param items Items to add.
  * @returns Array
  */
-export default function concatUniq<Item, Items extends unknown[]>(source: Item[], ...items: Items[]): (Item | Items[number])[] {
-  const count = items.length;
-
+export default function appendUniq<Item, Values extends any[]>(source: Item[], ...items: Values): (Item | Values[number])[] {
   const result = clone(source);
 
-  let index = 0;
-
-  while (index < count) {
-    const item = items[index];
-
-    pushUniq(result, ...item);
-
-    index++;
-  }
+  pushUniq(result, ...items);
 
   return result;
 }

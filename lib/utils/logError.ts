@@ -6,6 +6,6 @@ import log from './log';
  * @param params Parameters to log.
  * @returns void
  */
-export default function logError(...params: [string, ...unknown[]]): void {
+export default function logError(...params: unknown[]): void {
   log('\x1b[31m%s\x1b[0m', ...params);
 }
