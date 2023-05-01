@@ -19,13 +19,14 @@ const reject = (): Reject => {
  * @param closure Callback function.
  * @returns Array
  */
-export default function filter<Item, Closure extends FilterClosure<Item>, Return = Extract<ReturnType<Closure>, Item>>(
-  source: Item[],
-  closure: Closure,
-): Return[] {
-  const result = [];
-
+export default function filter<
+  Item,
+  Result extends Extract<ReturnType<Closure>, Item>,
+  Closure extends FilterClosure<Item> = FilterClosure<Item>,
+>(source: Item[], closure: Closure): Result[] {
   const count = source.length;
+
+  const result: Result[] = [];
 
   let index = 0;
 
@@ -33,7 +34,7 @@ export default function filter<Item, Closure extends FilterClosure<Item>, Return
     const item = source[index];
 
     if (closure(item, index, reject) === item) {
-      result.push(item as unknown as Return);
+      result.push(item as unknown as Result);
     }
 
     index++;

@@ -6,7 +6,7 @@ export type JoinOptions = {
 };
 
 /**
- * Join items in a source array.
+ * Join items from a source array.
  *
  * Also exists for key-paired items, see the "joinBy" function.
  *
@@ -18,16 +18,20 @@ export type JoinOptions = {
 export default function join(source: string[], separator?: string, options?: JoinOptions): string {
   const count = source.length;
 
-  const middleSeparator = separator ?? '';
-  const firstSeparator = options?.first ?? (count <= 2 ? options?.last : undefined) ?? middleSeparator;
-  const lastSeparator = count <= 2 ? '' : options?.last ?? middleSeparator;
+  if (count < 2) {
+    return source.join('');
+  }
 
   const parts = clone(source);
 
-  const firstPart = parts.shift();
-  const lastPart = parts.pop();
+  separator = separator ?? '';
 
-  return `${firstPart !== undefined ? `${firstPart}${firstSeparator}` : ''}${parts.join(middleSeparator)}${
-    lastPart !== undefined ? `${lastSeparator}${lastPart}` : ''
-  }`;
+  const last = options?.last ?? separator;
+
+  const firstPart = parts.shift() as string;
+  const lastPart = parts.pop() as string;
+
+  return `${firstPart}${options?.first ?? (count === 2 ? last : separator)}${parts.join(separator)}${
+    count === 2 ? '' : last
+  }${lastPart}`;
 }

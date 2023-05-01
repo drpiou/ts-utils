@@ -5,9 +5,9 @@
  * @returns Array
  */
 export default function entries<Item>(source: Item[]): [number, Item][] {
-  const result: [number, Item][] = [];
-
   const count = source.length;
+
+  const result: [number, Item][] = [];
 
   let index = 0;
 

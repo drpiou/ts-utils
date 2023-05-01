@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { describe, expectTypeOf, test } from 'vitest';
-import { ChunkClosure } from './chunkWhile';
+import { ChunkPredicate } from './chunkWhile';
 
 describe('types', () => {
   test('ChunkClosure', () => {
-    const match = <T extends ChunkClosure<any>>(t: T): T => t;
+    const match = <T extends ChunkPredicate<any>>(t: T): T => t;
 
-    const resultItem: ChunkClosure<number> = (_a, _b, _c) => true;
+    const resultItem: ChunkPredicate<number> = (_a, _b, _c) => true;
     match(resultItem);
 
     expectTypeOf(resultItem).parameter(0).toBeNumber();

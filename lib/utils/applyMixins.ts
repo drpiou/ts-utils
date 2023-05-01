@@ -1,4 +1,4 @@
-import { Constructor } from '../types/generic';
+import { Class } from 'utility-types';
 
 /**
  * Apply the given mixins to the base class.
@@ -6,7 +6,7 @@ import { Constructor } from '../types/generic';
  * @param base Source class.
  * @param mixins Mixins
  */
-export default function applyMixins(base: Constructor, mixins: Constructor[]): void {
+export default function applyMixins(base: Class<any>, mixins: Class<any>[]): void {
   mixins.forEach((mixin) => {
     Object.getOwnPropertyNames(mixin.prototype).forEach((name) => {
       Object.defineProperty(

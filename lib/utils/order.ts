@@ -13,8 +13,6 @@ import sort from './sort';
  * @param reversed Reverse order.
  * @returns Array
  */
-const order = <S>(source: S[], reversed?: boolean): S[] => {
+export default function order<Item>(source: Item[], reversed?: boolean): Item[] {
   return sort(clone(source), reversed);
-};
-
-export default order;
+}

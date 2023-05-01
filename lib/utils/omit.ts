@@ -5,30 +5,31 @@
  * @param keys Keys to remove.
  * @returns Object
  */
-const omit = <S extends object, K extends string>(source: S, keys: K[]): Omit<S, K> => {
-  const result: Omit<S, K> = {} as never;
+export default function omit<Item extends Record<string, any>, Keys extends keyof Item, Key extends Keys | string>(
+  source: Item,
+  keys: Key[],
+): Omit<Item, Key> {
+  const result = {} as Omit<Item, Key>;
 
-  const sourceKeys = Object.keys(source) as (keyof S)[];
+  const sourceKeys = Object.keys(source);
 
-  const c = sourceKeys.length;
+  const count = sourceKeys.length;
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    const index = sourceKeys[i];
+  while (index < count) {
+    const keyIndex = sourceKeys[index];
 
-    if (keys.indexOf(index as never) >= 0 || !Object.prototype.hasOwnProperty.call(source, index)) {
-      i++;
+    if (keys.indexOf(keyIndex as Key) >= 0 || !Object.prototype.hasOwnProperty.call(source, keyIndex)) {
+      index++;
 
       continue;
     }
 
-    (result as S)[index] = source[index];
+    result[keyIndex as Exclude<Keys, Key>] = source[keyIndex] as Item[Exclude<Keys, Key>];
 
-    i++;
+    index++;
   }
 
   return result;
-};
-
-export default omit;
+}

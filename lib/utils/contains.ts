@@ -1,19 +1,19 @@
-export type ContainsClosure<Item> = (item: Item, index: number) => boolean;
+export type ContainsPredicate<Item> = (item: Item, index: number) => boolean;
 
 /**
  * Return whether the given item exists in the source array.
  *
  * @param source Source array.
- * @param closure Callback function.
+ * @param predicate Callback function.
  * @returns boolean
  */
-export default function contains<Item>(source: Item[], closure: ContainsClosure<Item>): boolean {
+export default function contains<Item>(source: Item[], predicate: ContainsPredicate<Item>): boolean {
   const count = source.length;
 
   let index = 0;
 
   while (index < count) {
-    if (closure(source[index], index)) {
+    if (predicate(source[index], index)) {
       return true;
     }
 

@@ -12,10 +12,9 @@
  * @returns Array
  */
 const sortBy = <S extends object>(source: S[], key: keyof S, reversed?: boolean): S[] => {
-  const compareFunction = (a: S, b: S): number =>
-    (reversed ? String(a[key]) > String(b[key]) : String(a[key]) < String(b[key])) ? -1 : 1;
-
-  return source.sort(compareFunction);
+  return source.sort((a, b) => {
+    return (reversed ? String(a[key]) > String(b[key]) : String(a[key]) < String(b[key])) ? -1 : 1;
+  });
 };
 
 export default sortBy;

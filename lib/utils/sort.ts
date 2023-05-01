@@ -11,9 +11,9 @@
  * @returns Array
  */
 const sort = <S>(source: S[], reversed?: boolean): S[] => {
-  const compareFunction = (a: S, b: S): number => ((reversed ? String(a) > String(b) : String(a) < String(b)) ? -1 : 1);
-
-  return source.sort(compareFunction);
+  return source.sort((a, b) => {
+    return (reversed ? String(a) > String(b) : String(a) < String(b)) ? -1 : 1;
+  });
 };
 
 export default sort;

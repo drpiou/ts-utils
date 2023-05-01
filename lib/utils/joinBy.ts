@@ -1,7 +1,7 @@
 import join, { JoinOptions } from './join';
 
 /**
- * Join key-paired items in a source array.
+ * Join key-paired items from a source array.
  *
  * Also exists for items, see the "join" function.
  *
@@ -11,9 +11,9 @@ import join, { JoinOptions } from './join';
  * @param options Separator options.
  * @returns string
  */
-export default function joinBy<Source extends Record<string, any>>(
-  source: Source[],
-  key: keyof Source,
+export default function joinBy<Item extends Record<string, any>>(
+  source: Item[],
+  key: keyof Item | string,
   separator?: string,
   options?: JoinOptions,
 ): string {

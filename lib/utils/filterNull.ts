@@ -9,7 +9,7 @@ import filter from './filter';
  * @returns Array
  */
 export default function filterNull<Item>(source: Item[]): Exclude<Item, null>[] {
-  return filter(source, (value, _index, reject) => {
+  return filter<Item, Exclude<Item, null>>(source, (value, _index, reject) => {
     return value === null ? reject() : value;
   });
 }

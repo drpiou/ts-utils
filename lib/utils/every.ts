@@ -1,19 +1,23 @@
-export type EveryClosure<Item> = (item: Item, index: number) => boolean;
+export type EveryPredicate<Item> = (item: Item, index: number) => boolean;
 
 /**
  * Verify that all items pass a given truth test in the source array.
  *
  * @param source Source array.
- * @param closure Callback function.
+ * @param predicate Callback function.
  * @returns boolean
  */
-export default function every<Item>(source: Item[], closure: EveryClosure<Item>): boolean {
+export default function every<Item>(source: Item[], predicate: EveryPredicate<Item>): boolean {
   const count = source.length;
+
+  if (!count) {
+    return false;
+  }
 
   let index = 0;
 
   while (index < count) {
-    if (!closure(source[index], index)) {
+    if (!predicate(source[index], index)) {
       return false;
     }
 

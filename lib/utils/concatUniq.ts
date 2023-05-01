@@ -11,9 +11,9 @@ import pushUniq from './pushUniq';
  * @returns Collection
  */
 export default function concatUniq<Item, Items extends unknown[]>(source: Item[], ...items: Items[]): (Item | Items[number])[] {
-  const result = clone(source);
-
   const count = items.length;
+
+  const result: Item[] = clone(source);
 
   let index = 0;
 

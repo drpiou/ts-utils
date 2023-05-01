@@ -1,4 +1,4 @@
-export type ChunkClosure<Item> = (item: Item, index: number, chunk: Item[]) => boolean;
+export type ChunkPredicate<Item> = (item: Item, index: number, chunk: Item[]) => boolean;
 
 /**
  * Break the source array into smaller arrays.
@@ -6,13 +6,13 @@ export type ChunkClosure<Item> = (item: Item, index: number, chunk: Item[]) => b
  * This function returns a new array.
  *
  * @param source Source array.
- * @param closure Callback function.
+ * @param predicate Callback function.
  * @returns Array
  */
-export default function chunkWhile<Item>(source: Item[], closure: ChunkClosure<Item>): Item[][] {
-  const result: Item[][] = [];
-
+export default function chunkWhile<Item>(source: Item[], predicate: ChunkPredicate<Item>): Item[][] {
   const count = source.length;
+
+  const result: Item[][] = [];
 
   let index = 0;
   let chunk: Item[] = [];
@@ -20,7 +20,7 @@ export default function chunkWhile<Item>(source: Item[], closure: ChunkClosure<I
   while (index < count) {
     const item = source[index];
 
-    if (closure(item, index, chunk)) {
+    if (predicate(item, index, chunk)) {
       result.push([...chunk]);
 
       chunk = [];

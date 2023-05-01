@@ -9,23 +9,23 @@ import { FlattenDeep } from '../types/generic';
  * @param deep Flatten recursively.
  * @returns Array
  */
-export default function flatten<Item, Deep extends boolean = false, Return = Deep extends true ? FlattenDeep<Item>[] : Item[]>(
+export default function flatten<Item, Deep extends boolean = false, Result = Deep extends true ? FlattenDeep<Item> : Item>(
   source: Item[],
   deep?: Deep,
-): Return {
-  const result = [];
+): Result[] {
+  const count = source.length;
 
-  const c = source.length;
+  const result: Result[] = [];
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    const item = source[i];
+  while (index < count) {
+    const item = source[index];
 
-    result.push(...((Array.isArray(item) ? (deep ? flatten(item) : item) : [item]) as Item[]));
+    result.push(...((Array.isArray(item) ? (deep ? flatten(item) : item) : [item]) as Result[]));
 
-    i++;
+    index++;
   }
 
-  return result as Return;
+  return result;
 }

@@ -1,25 +1,25 @@
 import { describe, expect, test } from 'vitest';
-import first from './first';
+import last from './last';
 
-describe('first', () => {
+describe('last', () => {
   const source = ['a', 'b', 1, null, undefined];
 
   test('default', () => {
-    const result = first(source);
+    const result = last(source);
 
-    expect(result).toBe('a');
+    expect(result).toBe(undefined);
   });
 
   test('value', () => {
-    const result = first(source, (value, _index, reject) => {
-      return typeof value === 'number' ? value : reject();
+    const result = last(source, (value, _index, reject) => {
+      return typeof value === 'string' ? value : reject();
     });
 
-    expect(result).toBe(1);
+    expect(result).toBe('b');
   });
 
   test('index', () => {
-    const result = first(source, (value, index, reject) => {
+    const result = last(source, (value, index, reject) => {
       return index === 0 ? value : reject();
     });
 
@@ -27,7 +27,7 @@ describe('first', () => {
   });
 
   test('null', () => {
-    const result = first(source, (value, _index, reject) => {
+    const result = last(source, (value, _index, reject) => {
       return value === null ? value : reject();
     });
 
@@ -35,7 +35,7 @@ describe('first', () => {
   });
 
   test('undefined', () => {
-    const result = first(source, (value, _index, reject) => {
+    const result = last(source, (value, _index, reject) => {
       return value === 'undefined' ? value : reject();
     });
 

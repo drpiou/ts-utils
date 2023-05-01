@@ -8,8 +8,6 @@
  * @returns Collection
  */
 const pushUniq = <S>(source: S[], ...items: S[]): S[] => {
-  const result = source;
-
   const c = Number(items.length);
 
   let i = 0;
@@ -17,14 +15,14 @@ const pushUniq = <S>(source: S[], ...items: S[]): S[] => {
   while (i < c) {
     const item = items[i];
 
-    if (result.indexOf(item) === -1) {
-      result.push(item);
+    if (source.indexOf(item) === -1) {
+      source.push(item);
     }
 
     i++;
   }
 
-  return result;
+  return source;
 };
 
 export default pushUniq;

@@ -4,20 +4,24 @@
  * @param source Source array.
  * @returns Array
  */
-const keys = <S>(source: S[]): number[] => {
-  const result = [];
+export default function keys<Item extends any[] | Record<string, any>, Result = Item extends any[] ? number : keyof Item>(
+  source: Item,
+): Result[] {
+  if (!Array.isArray(source)) {
+    return Object.keys(source) as Result[];
+  }
 
-  const c = source.length;
+  const count = source.length;
 
-  let i = 0;
+  const result: Result[] = [];
 
-  while (i < c) {
-    result.push(i);
+  let index = 0;
 
-    i++;
+  while (index < count) {
+    result.push(index as Result);
+
+    index++;
   }
 
   return result;
-};
-
-export default keys;
+}

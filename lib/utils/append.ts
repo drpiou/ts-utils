@@ -12,8 +12,8 @@ import clone from './clone';
  * @param items Items to add.
  * @returns Array
  */
-export default function append<Item, Items extends unknown[]>(source: Item[], ...items: Items): (Item | Items[number])[] {
-  const result = clone(source);
+export default function append<Item, Items extends any[]>(source: Item[], ...items: Items): (Item | Items[number])[] {
+  const result: Item[] = clone(source);
 
   result.push(...(items as Item[]));
 

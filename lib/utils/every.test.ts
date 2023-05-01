@@ -15,4 +15,10 @@ describe('every', () => {
 
     expect(result).toBe(false);
   });
+
+  test('empty', () => {
+    const result = every([], () => true);
+
+    expect(result).toBe(false);
+  });
 });

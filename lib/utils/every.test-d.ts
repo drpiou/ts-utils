@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { describe, expectTypeOf, test } from 'vitest';
-import { EveryClosure } from './every';
+import { EveryPredicate } from './every';
 
 describe('types', () => {
   test('EveryClosure', () => {
-    const match = <T extends EveryClosure<any>>(t: T): T => t;
+    const match = <T extends EveryPredicate<any>>(t: T): T => t;
 
-    const resultItem: EveryClosure<number> = (_a, _b) => true;
+    const resultItem: EveryPredicate<number> = (_a, _b) => true;
     match(resultItem);
 
     expectTypeOf(resultItem).parameter(0).toBeNumber();
