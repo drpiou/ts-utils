@@ -1,3 +1,4 @@
+import { PlainObject } from '../types/generic';
 import join, { JoinOptions } from './join';
 
 /**
@@ -11,7 +12,7 @@ import join, { JoinOptions } from './join';
  * @param options Separator options.
  * @returns string
  */
-export default function joinBy<Item extends Record<string, any>>(
+export default function joinBy<Item extends PlainObject>(
   source: Item[],
   key: keyof Item | string,
   separator?: string,

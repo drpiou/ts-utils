@@ -1,10 +1,11 @@
 import { PickByValue } from 'utility-types';
+import { PlainObject } from '../types/generic';
 
-export type MinByIterateeFunction<Item extends Record<string, any>> = (item: Item, index: number) => number;
+export type MinByIterateeFunction<Item extends PlainObject> = (item: Item, index: number) => number;
 
-export type MinByIterateeProperty<Item extends Record<string, any>> = keyof PickByValue<Item, number>;
+export type MinByIterateeProperty<Item extends PlainObject> = keyof PickByValue<Item, number>;
 
-export type MinByIteratee<Item extends Record<string, any>> = MinByIterateeProperty<Item> | MinByIterateeFunction<Item>;
+export type MinByIteratee<Item extends PlainObject> = MinByIterateeProperty<Item> | MinByIterateeFunction<Item>;
 
 /**
  * Return the minimum value of the items in the source array.
@@ -13,7 +14,7 @@ export type MinByIteratee<Item extends Record<string, any>> = MinByIterateePrope
  * @param iteratee Item iteratee.
  * @returns number
  */
-export default function minBy<Item extends Record<string, any>>(
+export default function minBy<Item extends PlainObject>(
   source: Item[],
   iteratee: MinByIteratee<Item> | string,
 ): number | undefined {

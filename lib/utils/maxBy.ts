@@ -1,10 +1,11 @@
 import { PickByValue } from 'utility-types';
+import { PlainObject } from '../types/generic';
 
-export type MaxByIterateeFunction<Item extends Record<string, any>> = (item: Item, index: number) => number;
+export type MaxByIterateeFunction<Item extends PlainObject> = (item: Item, index: number) => number;
 
-export type MaxByIterateeProperty<Item extends Record<string, any>> = keyof PickByValue<Item, number>;
+export type MaxByIterateeProperty<Item extends PlainObject> = keyof PickByValue<Item, number>;
 
-export type MaxByIteratee<Item extends Record<string, any>> = MaxByIterateeProperty<Item> | MaxByIterateeFunction<Item>;
+export type MaxByIteratee<Item extends PlainObject> = MaxByIterateeProperty<Item> | MaxByIterateeFunction<Item>;
 
 /**
  * Return the maximum value of the items in the source array.
@@ -13,7 +14,7 @@ export type MaxByIteratee<Item extends Record<string, any>> = MaxByIterateePrope
  * @param iteratee Item iteratee.
  * @returns number
  */
-export default function maxBy<Item extends Record<string, any>>(
+export default function maxBy<Item extends PlainObject>(
   source: Item[],
   iteratee: MaxByIteratee<Item> | string,
 ): number | undefined {

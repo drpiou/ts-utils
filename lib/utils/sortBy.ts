@@ -1,8 +1,10 @@
-export type SortByIterateeFunction<Item extends Record<string, any>> = (item: Item, index: number) => string;
+import { PlainObject } from '../types/generic';
 
-export type SortByIterateeProperty<Item extends Record<string, any>> = keyof Item;
+export type SortByIterateeFunction<Item extends PlainObject> = (item: Item, index: number) => string;
 
-export type SortByIteratee<Item extends Record<string, any>> = SortByIterateeProperty<Item> | SortByIterateeFunction<Item>;
+export type SortByIterateeProperty<Item extends PlainObject> = keyof Item;
+
+export type SortByIteratee<Item extends PlainObject> = SortByIterateeProperty<Item> | SortByIterateeFunction<Item>;
 
 /**
  * Sort key-paired items in the source array.
@@ -17,7 +19,7 @@ export type SortByIteratee<Item extends Record<string, any>> = SortByIterateePro
  * @param reversed Reverse order.
  * @returns Array
  */
-export default function sortBy<Item extends Record<string, any>>(
+export default function sortBy<Item extends PlainObject>(
   source: Item[],
   iteratee: SortByIteratee<Item> | string,
   reversed?: boolean,

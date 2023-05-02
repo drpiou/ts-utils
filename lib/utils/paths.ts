@@ -1,4 +1,5 @@
 import isPlainObject from 'lodash/isPlainObject';
+import { PlainObject } from '../types/generic';
 import { Path, PathFinite } from '../types/path';
 
 /**
@@ -10,7 +11,7 @@ import { Path, PathFinite } from '../types/path';
  * @returns Array
  */
 export default function paths<
-  Source extends Record<string, any>,
+  Source extends PlainObject,
   Finite extends boolean = false,
   Result = Finite extends true ? PathFinite<Source> : Path<Source>,
 >(source: Source, finite?: Finite, prefix?: string): (Result | string)[] {

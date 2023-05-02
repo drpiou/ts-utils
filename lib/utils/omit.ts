@@ -1,3 +1,5 @@
+import { PlainObject } from '../types/generic';
+
 /**
  * Removes the keys of the source object.
  *
@@ -5,9 +7,9 @@
  * @param keys Keys to remove.
  * @returns Object
  */
-export default function omit<Item extends Record<string, any>, Keys extends keyof Item, Key extends Keys>(
+export default function omit<Item extends PlainObject, Keys extends keyof Item, Key extends Keys | string>(
   source: Item,
-  keys: (Key | string)[],
+  keys: Key[],
 ): Omit<Item, Key> {
   const result = {} as Omit<Item, Key>;
 

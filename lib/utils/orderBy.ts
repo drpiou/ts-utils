@@ -1,7 +1,8 @@
+import { PlainObject } from '../types/generic';
 import clone from './clone';
 import sortBy, { SortByIteratee } from './sortBy';
 
-export type OrderByIteratee<Item extends Record<string, any>> = SortByIteratee<Item>;
+export type OrderByIteratee<Item extends PlainObject> = SortByIteratee<Item>;
 
 /**
  * Order key-paired items in the source array.
@@ -16,7 +17,7 @@ export type OrderByIteratee<Item extends Record<string, any>> = SortByIteratee<I
  * @param reversed Reverse order.
  * @returns Array
  */
-export default function orderBy<Item extends Record<string, any>>(
+export default function orderBy<Item extends PlainObject>(
   source: Item[],
   iteratee: OrderByIteratee<Item> | string,
   reversed?: boolean,
