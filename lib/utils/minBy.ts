@@ -11,7 +11,7 @@ export type MinByIteratee<Item extends PlainObject> = MinByIterateeProperty<Item
  * Return the minimum value of the items in the source array.
  *
  * @param source Source array.
- * @param iteratee Item iteratee.
+ * @param iteratee Iteratee.
  * @returns number
  */
 export default function minBy<Item extends PlainObject>(

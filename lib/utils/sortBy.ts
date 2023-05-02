@@ -15,7 +15,7 @@ export type SortByIteratee<Item extends PlainObject> = SortByIterateeProperty<It
  * Also exists for items, see the "sort" function.
  *
  * @param source Source array.
- * @param iteratee Item iteratee.
+ * @param iteratee Iteratee.
  * @param reversed Reverse order.
  * @returns Array
  */

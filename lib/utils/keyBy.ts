@@ -11,7 +11,7 @@ export type KeyByIteratee<Item extends PlainObject> = KeyByIterateeProperty<Item
  * Return the key-paired items of the source array.
  *
  * @param source Source array.
- * @param iteratee Item iteratee.
+ * @param iteratee Iteratee.
  * @returns Object
  */
 export default function keyBy<

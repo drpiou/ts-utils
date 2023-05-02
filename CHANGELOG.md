@@ -12,19 +12,70 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - `appendUniq` utility function
 - `applyMixins` utility function
-- `assert...` utility function
+- `assert` utility function
+- `assertArray` utility function
+- `assertArrayFilled` utility function
+- `assertBoolean` utility function
+- `assertBooleanLike` utility function
+- `assertBooleanNumber` utility function
+- `assertBooleanString` utility function
+- `assertDatable` utility function
+- `assertDate` utility function
+- `assertDateString` utility function
+- `assertDateValid` utility function
+- `asserted` utility function
+- `assertEmail` utility function
+- `assertFunction` utility function
+- `assertIPv4` utility function
+- `assertIPv6` utility function
+- `assertNumber` utility function
+- `assertNumberValid` utility function
+- `assertPhone` utility function
+- `assertPlainObject` utility function
+- `asserts` utility function
+- `assertString` utility function
+- `assertStringFilled` utility function
+- `assertUrl` utility function
+- `assertUUID` utility function
 - `filterNull` utility function
 - `filterNullish` utility function
 - `filterUndefined` utility function
-- `is...` utility function
+- `is` utility function
+- `isArray` utility function
+- `isArrayFilled` utility function
+- `isAsserted` utility function
+- `isBoolean` utility function
+- `isBooleanLike` utility function
+- `isBooleanNumber` utility function
+- `isBooleanString` utility function
+- `isDatable` utility function
+- `isDate` utility function
+- `isDateString` utility function
+- `isDateValid` utility function
+- `isEmail` utility function
+- `isFunction` utility function
+- `isIPv4` utility function
+- `isIPv6` utility function
+- `isNumber` utility function
+- `isNumberValid` utility function
+- `isPhone` utility function
+- `isPlainObject` utility function
+- `isString` utility function
+- `isStringFilled` utility function
+- `isUrl` utility function
+- `isUUID` utility function
 - `maxBy` utility function
 - `minBy` utility function
 - `prependUniq` utility function
 - `sumBy` utility function
+- `unshift` utility function
+- `unshiftUniq` utility function
 - `validator` utility function
+- `Asserted` utility type
 - `CastArray` utility type
 - `FlattenDeep` utility type
-- test using vitest
+- `PlainObject` utility type
+- testing using vitest
 
 ### Changed
 
@@ -33,13 +84,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `first` callback must return value or rejection
 - `max` only accepts array of numbers
 - `min` only accepts array of numbers
-- `path` second parameters is an options literal object
+- `partition` callback must return value or rejection
 - `prepend` accepts any type of new items
 - `sum` only accepts array of numbers
+- `withoutProperties` is renamed to `omit`
 
 ### Removed
 
-- `collection`
+- `collection` utility function
+- `Constructor` utility type
+- `PartialDeep` utility type
+- `ReadonlyDeep` utility type
+- `NonNullableField` utility type
+- `PartialRecord` utility type
+- `Primitive` utility type
+- `ValueOf` utility type
 
 ## [0.0.4] - 2022-09-25
 

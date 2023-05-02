@@ -10,7 +10,7 @@ const reject: Reject = Object.freeze({ __reject: Symbol('reject') });
  * This function returns a new array.
  *
  * @param source Source array.
- * @param closure Callback function. If returns true, item is put on left, otherwise on right.
+ * @param closure Closure. If returns reject, item is put on right, otherwise on left.
  * @returns Array
  */
 export default function partition<

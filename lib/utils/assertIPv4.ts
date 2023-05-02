@@ -1,0 +1,12 @@
+import asserts from './asserts';
+import isIPv4 from './isIPv4';
+
+/**
+ * ...
+ *
+ * @param value Value.
+ * @param message Error message.
+ */
+export default function assertIPv4<T extends string>(value: unknown, message?: string): asserts value is T {
+  asserts(isIPv4(value), message);
+}

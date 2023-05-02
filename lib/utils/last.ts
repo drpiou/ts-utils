@@ -13,7 +13,7 @@ const reject: Reject = Object.freeze({ __reject: Symbol('reject') });
  * For the inverse, see the "first" function.
  *
  * @param source Source array.
- * @param closure Callback function.
+ * @param closure Closure.
  * @returns any
  */
 export default function last<

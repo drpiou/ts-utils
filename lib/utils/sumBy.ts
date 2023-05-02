@@ -11,7 +11,7 @@ export type SumByIteratee<Item extends PlainObject> = SumByIterateeProperty<Item
  * Return the sum of the items in the source array.
  *
  * @param source Source array.
- * @param iteratee Item iteratee.
+ * @param iteratee Iteratee.
  * @returns number
  */
 export default function sumBy<Item extends PlainObject>(

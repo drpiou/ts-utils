@@ -10,7 +10,7 @@ const reject: Reject = Object.freeze({ __reject: Symbol('reject') });
  * This function returns a new array.
  *
  * @param source Source array.
- * @param closure Callback function.
+ * @param closure Closure.
  * @returns Array
  */
 export default function filter<

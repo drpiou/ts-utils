@@ -11,7 +11,7 @@ export type MaxByIteratee<Item extends PlainObject> = MaxByIterateeProperty<Item
  * Return the maximum value of the items in the source array.
  *
  * @param source Source array.
- * @param iteratee Item iteratee.
+ * @param iteratee Iteratee.
  * @returns number
  */
 export default function maxBy<Item extends PlainObject>(
