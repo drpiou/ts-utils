@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isNumber from './isNumber';
 
 /**
- * ...
+ * Assert the value is a number.
  *
  * @param value Value.
  * @param message Error message.

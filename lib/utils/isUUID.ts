@@ -14,10 +14,11 @@ const isUUIDPatterns = {
 };
 
 /**
- * ...
+ * Check if the value is a UUID.
  *
  * @param value Value.
  * @param version Value.
+ * @returns boolean
  */
 export default function isUUID<T extends string>(value: unknown, version?: isUUIDVersion): value is Asserted<T> {
   return isString(value) && isUUIDPatterns[isAsserted(version) ? version : 'all'].test(value);

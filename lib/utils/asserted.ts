@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isAsserted from './isAsserted';
 
 /**
- * ...
+ * Assert the value.
  *
  * @param value Value.
  * @param message Error message.

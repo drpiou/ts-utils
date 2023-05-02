@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isBooleanLike from './isBooleanLike';
 
 /**
- * ...
+ * Assert the value is a boolean like.
  *
  * @param value Value.
  * @param message Error message.

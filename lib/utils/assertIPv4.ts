@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isIPv4 from './isIPv4';
 
 /**
- * ...
+ * Assert the value is an IPv4.
  *
  * @param value Value.
  * @param message Error message.

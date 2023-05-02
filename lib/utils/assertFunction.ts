@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isFunction from './isFunction';
 
 /**
- * ...
+ * Assert the value is a function.
  *
  * @param value Value.
  * @param message Error message.

@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isArrayFilled from './isArrayFilled';
 
 /**
- * ...
+ * Assert the value is an array filled.
  *
  * @param value Value.
  * @param message Error message.

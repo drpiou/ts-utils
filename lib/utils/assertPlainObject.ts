@@ -3,7 +3,7 @@ import asserts from './asserts';
 import isPlainObject from './isPlainObject';
 
 /**
- * ...
+ * Assert the value is a plain object.
  *
  * @param value Value.
  * @param message Error message.

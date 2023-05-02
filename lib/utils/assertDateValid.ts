@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isDateValid from './isDateValid';
 
 /**
- * ...
+ * Assert the value is a valid date.
  *
  * @param value Value.
  * @param message Error message.

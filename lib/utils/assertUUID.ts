@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isUUID, { isUUIDVersion } from './isUUID';
 
 /**
- * ...
+ * Assert the value is a uuid.
  *
  * @param value Value.
  * @param version UUID version.

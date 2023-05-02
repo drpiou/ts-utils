@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isArray from './isArray';
 
 /**
- * ...
+ * Assert the value is an array.
  *
  * @param value Value.
  * @param message Error message.

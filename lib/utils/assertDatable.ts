@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isDatable from './isDatable';
 
 /**
- * ...
+ * Assert the value is datable.
  *
  * @param value Value.
  * @param message Error message.

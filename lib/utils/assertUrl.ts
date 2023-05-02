@@ -2,7 +2,7 @@ import asserts from './asserts';
 import isUrl from './isUrl';
 
 /**
- * ...
+ * Assert the value is an url.
  *
  * @param value Value.
  * @param protocols Url protocols.
