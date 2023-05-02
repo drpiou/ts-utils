@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [0.0.5] - 2023-04-26
+## [0.0.6] - 2023-05-02
+
+### Added
+
+- `IsUUIDVersion` utility function type
+
+## [0.0.5] - 2023-05-02
 
 ### Added
 
@@ -134,7 +140,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - first commit
 
-[Unreleased]: https://github.com/drpiou/ts-utils/compare/v0.0.4...HEAD
+[Unreleased]: https://github.com/drpiou/ts-utils/compare/v0.0.6...HEAD
+[0.0.6]: https://github.com/drpiou/ts-utils/compare/v0.0.5...v0.0.6
+[0.0.5]: https://github.com/drpiou/ts-utils/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/drpiou/ts-utils/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/drpiou/ts-utils/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/drpiou/ts-utils/compare/v0.0.1...v0.0.2
