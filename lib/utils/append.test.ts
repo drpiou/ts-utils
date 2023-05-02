@@ -4,7 +4,7 @@ import append from './append';
 test('append', () => {
   const source = ['a', 'b', 1];
 
-  const result = append(source, true, [5]);
+  const result = append(source, 'a', 'b', true);
 
-  expect(result).toEqual(['a', 'b', 1, true, [5]]);
+  expect(result).toEqual(['a', 'b', 1, 'a', 'b', true]);
 });

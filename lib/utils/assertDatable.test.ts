@@ -4,7 +4,7 @@ import { assertsMessage } from './asserts';
 
 describe('assertDatable', () => {
   test('string', () => {
-    expect(() => assertDatable('')).not.toThrowError(assertsMessage);
+    expect(() => assertDatable('')).toThrowError(assertsMessage);
   });
 
   test('number', () => {
@@ -37,5 +37,9 @@ describe('assertDatable', () => {
 
   test('undefined', () => {
     expect(() => assertDatable(undefined)).toThrowError(assertsMessage);
+  });
+
+  test('string:date', () => {
+    expect(() => assertDatable('2020-02-22')).not.toThrowError(assertsMessage);
   });
 });

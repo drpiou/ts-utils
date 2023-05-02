@@ -2,7 +2,7 @@ import { Asserted } from '../types/generic';
 import isString from './isString';
 
 /**
- * Check if the value is phone.
+ * Check if the value is a phone.
  *
  * @param value Value.
  * @returns boolean

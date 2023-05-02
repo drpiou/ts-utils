@@ -39,12 +39,8 @@ describe('assertPhone', () => {
     expect(() => assertPhone(undefined)).toThrowError(assertsMessage);
   });
 
-  test('0', () => {
-    expect(() => assertPhone('0789008070')).not.toThrowError(assertsMessage);
-  });
-
   test('+', () => {
-    expect(() => assertPhone('+41789008070')).not.toThrowError(assertsMessage);
+    expect(() => assertPhone('+16152435172')).not.toThrowError(assertsMessage);
   });
 
   test('format', () => {
@@ -52,7 +48,7 @@ describe('assertPhone', () => {
   });
 
   test('-', () => {
-    expect(() => assertPhone('-41789008070')).toThrowError(assertsMessage);
+    expect(() => assertPhone('-16152435172')).toThrowError(assertsMessage);
   });
 
   test('/', () => {

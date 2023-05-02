@@ -3,7 +3,7 @@ import isDatable from './isDatable';
 
 describe('isDatable', () => {
   test('string', () => {
-    expect(isDatable('')).toBe(true);
+    expect(isDatable('')).toBe(false);
   });
 
   test('number', () => {
@@ -36,5 +36,9 @@ describe('isDatable', () => {
 
   test('undefined', () => {
     expect(isDatable(undefined)).toBe(false);
+  });
+
+  test('string:date', () => {
+    expect(isDatable('2020-02-22')).toBe(true);
   });
 });

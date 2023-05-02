@@ -4,7 +4,7 @@ import appendUniq from './appendUniq';
 test('appendUniq', () => {
   const source = ['a', 'b', 1];
 
-  const result = appendUniq(source, ...source, true, [5]);
+  const result = appendUniq(source, 'a', 'b', true);
 
-  expect(result).toEqual(['a', 'b', 1, true, [5]]);
+  expect(result).toEqual(['a', 'b', 1, true]);
 });
