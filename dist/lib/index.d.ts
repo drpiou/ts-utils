@@ -5,6 +5,7 @@ export type { ContainsPredicate } from './utils/contains';
 export type { EveryPredicate } from './utils/every';
 export type { FilterClosure } from './utils/filter';
 export type { FirstClosure } from './utils/first';
+export type { IsUUIDVersion } from './utils/isUUID';
 export type { KeyByIteratee, KeyByIterateeFunction, KeyByIterateeProperty } from './utils/keyBy';
 export type { LastClosure } from './utils/last';
 export type { MaxByIteratee, MaxByIterateeFunction, MaxByIterateeProperty } from './utils/maxBy';

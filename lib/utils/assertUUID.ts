@@ -1,5 +1,5 @@
 import asserts from './asserts';
-import isUUID, { isUUIDVersion } from './isUUID';
+import isUUID, { IsUUIDVersion } from './isUUID';
 
 /**
  * Assert the value is a uuid.
@@ -10,7 +10,7 @@ import isUUID, { isUUIDVersion } from './isUUID';
  */
 export default function assertUUID<T extends string>(
   value: unknown,
-  version?: isUUIDVersion,
+  version?: IsUUIDVersion,
   message?: string,
 ): asserts value is T {
   asserts(isUUID(value, version), message);

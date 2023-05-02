@@ -1,4 +1,4 @@
-import { isUUIDVersion } from './isUUID';
+import { IsUUIDVersion } from './isUUID';
 /**
  * Assert the value is a uuid.
  *
@@ -6,4 +6,4 @@ import { isUUIDVersion } from './isUUID';
  * @param version UUID version.
  * @param message Error message.
  */
-export default function assertUUID<T extends string>(value: unknown, version?: isUUIDVersion, message?: string): asserts value is T;
+export default function assertUUID<T extends string>(value: unknown, version?: IsUUIDVersion, message?: string): asserts value is T;
