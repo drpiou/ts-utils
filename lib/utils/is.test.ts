@@ -249,13 +249,12 @@ describe('is', () => {
   });
 
   test('plainObject', () => {
-    expect(is.plainObject('')).toBe(true);
+    expect(is.plainObject('')).toBe(false);
     expect(is.plainObject(0)).toBe(false);
     expect(is.plainObject(true)).toBe(false);
     expect(is.plainObject([])).toBe(false);
     expect(is.plainObject(new Date())).toBe(false);
     expect(is.plainObject(() => undefined)).toBe(false);
-    expect(is.plainObject({})).toBe(false);
     expect(is.plainObject({})).toBe(true);
     expect(is.plainObject(null)).toBe(false);
     expect(is.plainObject(undefined)).toBe(false);
@@ -313,8 +312,11 @@ describe('is', () => {
     expect(is.uuid(null)).toBe(false);
     expect(is.uuid(undefined)).toBe(false);
 
+    expect(is.uuid('9fd51a62-e87c-11ed-a05b-0242ac120003')).toBe(true);
     expect(is.uuid('9fd51a62-e87c-11ed-a05b-0242ac120003', 1)).toBe(true);
     expect(is.uuid('9fd51a62-e87c-11ed-a05b-0242ac120003', 4)).toBe(false);
+
+    expect(is.uuid('34d57fc1-2cb2-4da0-a383-00fb304f1506')).toBe(true);
     expect(is.uuid('34d57fc1-2cb2-4da0-a383-00fb304f1506', 1)).toBe(false);
     expect(is.uuid('34d57fc1-2cb2-4da0-a383-00fb304f1506', 4)).toBe(true);
   });

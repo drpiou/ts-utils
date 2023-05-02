@@ -115,9 +115,7 @@ const isUUIDPatterns = {
 };
 
 export function isUUID<T extends string>(value: unknown, version?: keyof typeof isUUIDPatterns): value is Asserted<T> {
-  const pattern = isUUIDPatterns[isString(version) ? version : 'all'];
-
-  return isString(value) && !!pattern && pattern.test(value);
+  return isString(value) && isUUIDPatterns[isString(version) ? version : 'all'].test(value);
 }
 
 const is = {
