@@ -1,3 +1,11 @@
+import { PlainObject } from '../types/generic';
+
+export type SortByIterateeFunction<Item extends PlainObject> = (item: Item, index: number) => string;
+
+export type SortByIterateeProperty<Item extends PlainObject> = keyof Item;
+
+export type SortByIteratee<Item extends PlainObject> = SortByIterateeProperty<Item> | SortByIterateeFunction<Item>;
+
 /**
  * Sort key-paired items in the source array.
  *
@@ -7,15 +15,25 @@
  * Also exists for items, see the "sort" function.
  *
  * @param source Source array.
- * @param key Item key.
+ * @param iteratee Iteratee.
  * @param reversed Reverse order.
  * @returns Array
  */
-const sortBy = <S extends object>(source: S[], key: keyof S, reversed?: boolean): S[] => {
-  const compareFunction = (a: S, b: S): number =>
-    (reversed ? String(a[key]) > String(b[key]) : String(a[key]) < String(b[key])) ? -1 : 1;
+export default function sortBy<Item extends PlainObject>(
+  source: Item[],
+  iteratee: SortByIteratee<Item> | string,
+  reversed?: boolean,
+): Item[] {
+  const parser: SortByIterateeFunction<Item> =
+    typeof iteratee === 'function' ? (s, i) => iteratee(s, i) : (s) => String(s[iteratee]);
 
-  return source.sort(compareFunction);
-};
+  let index = 0;
 
-export default sortBy;
+  return source.sort((a, b) => {
+    const item = (reversed ? parser(a, index) > parser(b, index) : parser(a, index) < parser(b, index)) ? -1 : 1;
+
+    index++;
+
+    return item;
+  });
+}

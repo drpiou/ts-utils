@@ -8,24 +8,22 @@ import pushUniq from './pushUniq';
  *
  * @param source Source array.
  * @param items Items to add.
- * @returns Collection
+ * @returns Array
  */
-const concatUniq = <S>(source: S[], ...items: S[][]): S[] => {
+export default function concatUniq<Item, Items extends unknown[]>(source: Item[], ...items: Items[]): (Item | Items[number])[] {
+  const count = items.length;
+
   const result = clone(source);
 
-  const c = Number(items.length);
+  let index = 0;
 
-  let i = 0;
-
-  while (i < c) {
-    const item = items[i];
+  while (index < count) {
+    const item = items[index];
 
     pushUniq(result, ...item);
 
-    i++;
+    index++;
   }
 
   return result;
-};
-
-export default concatUniq;
+}

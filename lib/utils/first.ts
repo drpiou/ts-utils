@@ -1,4 +1,8 @@
-import { BooleanClosure } from '../types/collection';
+export type FirstClosure<Item> = (item: Item, index: number, reject: Reject) => Item | Reject;
+
+type Reject = { __reject: symbol };
+
+const reject: Reject = Object.freeze({ __reject: Symbol('reject') });
 
 /**
  * Return the first item that passes a given truth test in the source array.
@@ -9,29 +13,31 @@ import { BooleanClosure } from '../types/collection';
  * For the inverse, see the "last" function.
  *
  * @param source Source array.
- * @param closure Callback function.
+ * @param closure Closure.
  * @returns any
  */
-const first = <S>(source: S[], closure?: BooleanClosure<S>): S | undefined => {
+export default function first<
+  Item,
+  Result extends Extract<ReturnType<Closure>, Item>,
+  Closure extends FirstClosure<Item> = FirstClosure<Item>,
+>(source: Item[], closure?: Closure): Result | undefined {
   if (!closure) {
-    return source[0];
+    return source[0] as Result | undefined;
   }
 
-  const c = source.length;
+  const count = source.length;
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    const item = source[i];
+  while (index < count) {
+    const item = source[index];
 
-    if (closure(item, i)) {
-      return item;
+    if (closure(item, index, reject) === item) {
+      return item as Result | undefined;
     }
 
-    i++;
+    index++;
   }
 
   return;
-};
-
-export default first;
+}

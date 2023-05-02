@@ -1,7 +1,8 @@
-import joinWords, { JoinWordsOptions } from './joinWords';
+import { PlainObject } from '../types/generic';
+import join, { JoinOptions } from './join';
 
 /**
- * Join key-paired items in a source array.
+ * Join key-paired items from a source array.
  *
  * Also exists for items, see the "join" function.
  *
@@ -11,12 +12,15 @@ import joinWords, { JoinWordsOptions } from './joinWords';
  * @param options Separator options.
  * @returns string
  */
-const joinBy = <S extends object>(source: S[], key: keyof S, separator?: string, options?: JoinWordsOptions): string => {
-  return joinWords(
+export default function joinBy<Item extends PlainObject>(
+  source: Item[],
+  key: keyof Item | string,
+  separator?: string,
+  options?: JoinOptions,
+): string {
+  return join(
     source.map((item) => String(item[key])),
     separator,
     options,
   );
-};
-
-export default joinBy;
+}

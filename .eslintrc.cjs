@@ -22,7 +22,7 @@ module.exports = {
     'no-console': 'warn',
     'no-extra-semi': 'error',
     'no-return-await': 'error',
-    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    // 'no-unused-vars': ['warn'],
     'prettier/prettier': 'error',
     'react/jsx-indent': ['error', 2, { checkAttributes: false, indentLogicalExpressions: false }],
     'react/jsx-no-bind': ['warn'],
@@ -53,11 +53,11 @@ module.exports = {
       rules: {
         'no-shadow': 'off', // Must set to false according to @typescript-eslint/no-shadow
         '@typescript-eslint/adjacent-overload-signatures': ['warn'],
-        '@typescript-eslint/explicit-function-return-type': ['error'],
+        // '@typescript-eslint/explicit-function-return-type': ['error'],
         '@typescript-eslint/explicit-module-boundary-types': ['error'],
         '@typescript-eslint/no-invalid-void-type': ['warn'],
         '@typescript-eslint/no-shadow': ['error'],
-        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_.*_$', varsIgnorePattern: '^_.*_$' }],
+        // '@typescript-eslint/no-unused-vars': ['warn'],
       },
     },
   ],

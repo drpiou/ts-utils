@@ -1,4 +1,8 @@
-import { BooleanClosure } from '../types/collection';
+export type PartitionClosure<Item> = (item: Item, index: number, reject: Reject) => Item | Reject;
+
+type Reject = { __reject: symbol };
+
+const reject: Reject = Object.freeze({ __reject: Symbol('reject') });
 
 /**
  * Separate items that pass a given truth test in the source array.
@@ -6,30 +10,34 @@ import { BooleanClosure } from '../types/collection';
  * This function returns a new array.
  *
  * @param source Source array.
- * @param closure Callback function. If returns true, item is put on left, otherwise on right.
+ * @param closure Closure. If returns reject, item is put on right, otherwise on left.
  * @returns Array
  */
-const partition = <S>(source: S[], closure: BooleanClosure<S>): S[][] => {
-  const itemsLeft = [];
-  const itemsRight = [];
+export default function partition<
+  Item,
+  Result extends [Left[], Right[]],
+  Closure extends PartitionClosure<Item> = PartitionClosure<Item>,
+  Left = Extract<ReturnType<Closure>, Item>,
+  Right = [Exclude<Item, Left>] extends [never] ? Item : Exclude<Item, Left>,
+>(source: Item[], closure: Closure): Result {
+  const itemsLeft: Left[] = [];
+  const itemsRight: Right[] = [];
 
-  const c = source.length;
+  const count = source.length;
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    const item = source[i];
+  while (index < count) {
+    const item = source[index];
 
-    if (closure(item, i)) {
-      itemsLeft.push(item);
+    if (closure(item, index, reject) === item) {
+      itemsLeft.push(item as undefined as Left);
     } else {
-      itemsRight.push(item);
+      itemsRight.push(item as undefined as Right);
     }
 
-    i++;
+    index++;
   }
 
-  return [itemsLeft, itemsRight];
-};
-
-export default partition;
+  return [itemsLeft, itemsRight] as Result;
+}

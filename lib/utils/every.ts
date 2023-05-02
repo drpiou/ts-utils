@@ -1,26 +1,28 @@
-import { BooleanClosure } from '../types/collection';
+export type EveryPredicate<Item> = (item: Item, index: number) => boolean;
 
 /**
  * Verify that all items pass a given truth test in the source array.
  *
  * @param source Source array.
- * @param closure Callback function.
+ * @param predicate Predicate.
  * @returns boolean
  */
-const every = <S>(source: S[], closure: BooleanClosure<S>): boolean => {
-  const c = source.length;
+export default function every<Item>(source: Item[], predicate: EveryPredicate<Item>): boolean {
+  const count = source.length;
 
-  let i = 0;
+  if (!count) {
+    return false;
+  }
 
-  while (i < c) {
-    if (!closure(source[i], i)) {
+  let index = 0;
+
+  while (index < count) {
+    if (!predicate(source[index], index)) {
       return false;
     }
 
-    i++;
+    index++;
   }
 
   return true;
-};
-
-export default every;
+}

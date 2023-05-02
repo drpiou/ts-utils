@@ -1,26 +1,24 @@
-import { BooleanClosure } from '../types/collection';
+export type ContainsPredicate<Item> = (item: Item, index: number) => boolean;
 
 /**
  * Return whether the given item exists in the source array.
  *
  * @param source Source array.
- * @param closure Callback function.
+ * @param predicate Predicate.
  * @returns boolean
  */
-const contains = <S>(source: S[], closure: BooleanClosure<S>): boolean => {
-  const c = source.length;
+export default function contains<Item>(source: Item[], predicate: ContainsPredicate<Item>): boolean {
+  const count = source.length;
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    if (closure(source[i], i)) {
+  while (index < count) {
+    if (predicate(source[index], index)) {
       return true;
     }
 
-    i++;
+    index++;
   }
 
   return false;
-};
-
-export default contains;
+}

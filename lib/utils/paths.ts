@@ -1,38 +1,45 @@
 import isPlainObject from 'lodash/isPlainObject';
-import { Path } from '../types/generic';
+import { PlainObject } from '../types/generic';
+import { Path, PathFinite } from '../types/path';
 
 /**
  * Return all the paths in dot notation of the source object.
  *
  * @param source Source object.
- * @param parent Parent key.
+ * @param finite Pick finite path.
+ * @param prefix Prefix string.
  * @returns Array
  */
-const paths = <S extends object>(source: S, parent = ''): Path<S>[] => {
-  const result: string[] = [];
+export default function paths<
+  Source extends PlainObject,
+  Finite extends boolean = false,
+  Result = Finite extends true ? PathFinite<Source> : Path<Source>,
+>(source: Source, finite?: Finite, prefix?: string): (Result | string)[] {
+  const result = [];
 
   const sourceEntries = Object.entries(source);
 
-  const c = sourceEntries.length;
+  const count = sourceEntries.length;
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    const key = sourceEntries[i][0];
-    const value: unknown = sourceEntries[i][1];
+  while (index < count) {
+    const key = sourceEntries[index][0];
+    const value: unknown = sourceEntries[index][1];
+    const valueIsObject = isPlainObject(value);
 
-    const path = parent ? [parent, key].join('.') : key;
+    const path = prefix ? [prefix, key].join('.') : key;
 
-    result.push(path);
-
-    if (value && isPlainObject(value)) {
-      result.push(...paths(value as object, path));
+    if (!valueIsObject || !finite) {
+      result.push(path);
     }
 
-    i++;
+    if (valueIsObject) {
+      result.push(...paths(value as NonNullable<unknown>, finite, path));
+    }
+
+    index++;
   }
 
   return result as never;
-};
-
-export default paths;
+}

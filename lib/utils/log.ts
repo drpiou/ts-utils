@@ -4,9 +4,7 @@
  * @param params Parameters to log.
  * @returns void
  */
-const log = (...params: unknown[]): void => {
+export default function log(...params: unknown[]): void {
   // eslint-disable-next-line no-console
   console.log(...params);
-};
-
-export default log;
+}

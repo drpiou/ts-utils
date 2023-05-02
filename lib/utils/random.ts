@@ -9,28 +9,27 @@ import keys from './keys';
  * @param unique Should the items be uniq.
  * @returns Array
  */
-const random = <S>(source: S[], count?: number, unique?: boolean): S[] => {
-  const result: S[] = [];
+export default function random<Item>(source: Item[], count?: number, unique?: boolean): Item[] {
+  const indexes = keys(source);
 
-  const size = keys(source);
+  count = count === undefined ? 1 : count;
+  count = unique ? Math.min(count, source.length) : count;
 
-  const c = unique ? Math.min(count || 1, source.length) : count || 1;
+  const result = [];
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    const randomIndex = _random(1, size.length) - 1;
+  while (index < count) {
+    const randomIndex = _random(1, indexes.length) - 1;
 
-    result.push(source[size[randomIndex]]);
+    result.push(source[indexes[randomIndex]]);
 
     if (unique) {
-      size.splice(randomIndex, 1);
+      indexes.splice(randomIndex, 1);
     }
 
-    i++;
+    index++;
   }
 
   return result;
-};
-
-export default random;
+}

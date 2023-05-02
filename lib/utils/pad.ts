@@ -10,7 +10,7 @@ import fill from 'lodash/fill';
  * @param value Item to fill.
  * @returns Array
  */
-const pad = <S>(source: S[], count: number, value: S): S[] => {
+export default function pad<Item, Value>(source: Item[], count: number, value: Value): (Item | Value)[] {
   const countAbs = Math.abs(count);
   const size = source.length;
 
@@ -21,6 +21,4 @@ const pad = <S>(source: S[], count: number, value: S): S[] => {
   const fillArray = fill(new Array(countAbs - size), value);
 
   return count < 0 ? [...fillArray, ...source] : [...source, ...fillArray];
-};
-
-export default pad;
+}

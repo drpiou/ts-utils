@@ -1,32 +1,38 @@
-import { BooleanClosure } from '../types/collection';
+export type FilterClosure<Item> = (item: Item, index: number, reject: Reject) => Item | Reject;
+
+type Reject = { __reject: symbol };
+
+const reject: Reject = Object.freeze({ __reject: Symbol('reject') });
 
 /**
- * Filter the items that pass a given truth test in the source array.
+ * Filter the items that pass a given truth test from the source array.
  *
  * This function returns a new array.
  *
  * @param source Source array.
- * @param closure Callback function.
+ * @param closure Closure.
  * @returns Array
  */
-const filter = <S>(source: S[], closure?: BooleanClosure<S>): S[] => {
-  const result = [];
+export default function filter<
+  Item,
+  Result extends Extract<ReturnType<Closure>, Item>,
+  Closure extends FilterClosure<Item> = FilterClosure<Item>,
+>(source: Item[], closure: Closure): Result[] {
+  const count = source.length;
 
-  const c = source.length;
+  const result = [] as Result[];
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    const item = source[i];
+  while (index < count) {
+    const item = source[index];
 
-    if (closure?.(item, i) ?? Boolean(item)) {
-      result.push(item);
+    if (closure(item, index, reject) === item) {
+      result.push(item as unknown as Result);
     }
 
-    i++;
+    index++;
   }
 
   return result;
-};
-
-export default filter;
+}

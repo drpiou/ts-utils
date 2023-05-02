@@ -1,36 +1,29 @@
-import isPlainObject from 'lodash/isPlainObject';
-
 /**
  * Return the maximum value of the items in the source array.
  *
  * @param source Source array.
- * @param key Item key.
  * @returns number
  */
-const max = <S>(source: S[], key?: keyof S): number => {
-  let result = 0;
+export default function max(source: number[]): number | undefined {
+  const count = source.length;
 
-  const c = source.length;
+  if (!count) {
+    return undefined;
+  }
 
-  let i = 0;
+  let result = source[0];
 
-  while (i < c) {
-    const item = source[i];
+  let index = 1;
 
-    const value = key && isPlainObject(item) ? item[key] : item;
+  while (index < count) {
+    const value = source[index];
 
-    if (value !== null && value !== undefined) {
-      const number = Number(value);
-
-      if (!isNaN(number)) {
-        result = number > result ? number : result;
-      }
+    if (value > result) {
+      result = value;
     }
 
-    i++;
+    index++;
   }
 
   return result;
-};
-
-export default max;
+}

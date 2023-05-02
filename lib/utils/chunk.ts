@@ -9,8 +9,6 @@ import chunkWhile from './chunkWhile';
  * @param size Chunk size.
  * @returns Array
  */
-const chunk = <I>(source: I[], size: number): I[][] => {
+export default function chunk<Item>(source: Item[], size: number): Item[][] {
   return chunkWhile(source, (_item, _index, _chunk) => _chunk.length === size);
-};
-
-export default chunk;
+}

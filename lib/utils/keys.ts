@@ -1,23 +1,29 @@
+import { PlainObject } from '../types/generic';
+
 /**
  * Return the indexes of the source array.
  *
  * @param source Source array.
  * @returns Array
  */
-const keys = <S>(source: S[]): number[] => {
+export default function keys<Item extends any[] | PlainObject, Result = Item extends any[] ? number : keyof Item>(
+  source: Item,
+): Result[] {
+  if (!Array.isArray(source)) {
+    return Object.keys(source) as Result[];
+  }
+
+  const count = source.length;
+
   const result = [];
 
-  const c = source.length;
+  let index = 0;
 
-  let i = 0;
+  while (index < count) {
+    result.push(index as Result);
 
-  while (i < c) {
-    result.push(i);
-
-    i++;
+    index++;
   }
 
   return result;
-};
-
-export default keys;
+}

@@ -4,20 +4,18 @@
  * @param source Source array.
  * @returns Array
  */
-const entries = <S>(source: S[]): [number, S][] => {
-  const result: [number, S][] = [];
+export default function entries<Item>(source: Item[]): [number, Item][] {
+  const count = source.length;
 
-  const c = source.length;
+  const result = [] as [number, Item][];
 
-  let i = 0;
+  let index = 0;
 
-  while (i < c) {
-    result.push([i, source[i]]);
+  while (index < count) {
+    result.push([index, source[index]]);
 
-    i++;
+    index++;
   }
 
   return result;
-};
-
-export default entries;
+}

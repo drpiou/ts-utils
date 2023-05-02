@@ -2,29 +2,28 @@
  * Add the given items to the end of the source array.
  *
  * This function mutates the source array.
+ * To return a new array, use the "appendUniq" method.
+ *
+ * For the inverse, see the "unshiftUniq" function.
  *
  * @param source Source array.
  * @param items Items to add.
- * @returns Collection
+ * @returns Array
  */
-const pushUniq = <S>(source: S[], ...items: S[]): S[] => {
-  const result = source;
+export default function pushUniq<Item>(source: Item[], ...items: Item[]): Item[] {
+  const count = items.length;
 
-  const c = Number(items.length);
+  let index = 0;
 
-  let i = 0;
+  while (index < count) {
+    const item = items[index];
 
-  while (i < c) {
-    const item = items[i];
-
-    if (result.indexOf(item) === -1) {
-      result.push(item);
+    if (source.indexOf(item) === -1) {
+      source.push(item);
     }
 
-    i++;
+    index++;
   }
 
-  return result;
-};
-
-export default pushUniq;
+  return source;
+}

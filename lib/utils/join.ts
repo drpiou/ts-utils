@@ -1,7 +1,12 @@
-import joinWords, { JoinWordsOptions } from './joinWords';
+import clone from './clone';
+
+export type JoinOptions = {
+  first?: string;
+  last?: string;
+};
 
 /**
- * Join items in a source array.
+ * Join items from a source array.
  *
  * Also exists for key-paired items, see the "joinBy" function.
  *
@@ -10,12 +15,23 @@ import joinWords, { JoinWordsOptions } from './joinWords';
  * @param options Separator options.
  * @returns string
  */
-const join = <S>(source: S[], separator?: string, options?: JoinWordsOptions): string => {
-  return joinWords(
-    source.map((item) => String(item)),
-    separator,
-    options,
-  );
-};
+export default function join(source: string[], separator?: string, options?: JoinOptions): string {
+  const count = source.length;
 
-export default join;
+  if (count < 2) {
+    return source.join('');
+  }
+
+  const parts = clone(source);
+
+  separator = separator ?? '';
+
+  const last = options?.last ?? separator;
+
+  const firstPart = parts.shift() as string;
+  const lastPart = parts.pop() as string;
+
+  return `${firstPart}${options?.first ?? (count === 2 ? last : separator)}${parts.join(separator)}${
+    count === 2 ? '' : last
+  }${lastPart}`;
+}

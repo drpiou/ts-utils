@@ -9,8 +9,6 @@ import cloneDeep from 'lodash/cloneDeep';
  * @param deep Clone recursively.
  * @returns Array
  */
-const clone = <I>(source: I[], deep?: boolean): I[] => {
+export default function clone<Item>(source: Item[], deep?: boolean): Item[] {
   return [...(deep ? cloneDeep(source) : source)];
-};
-
-export default clone;
+}
