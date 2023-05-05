@@ -916,7 +916,7 @@ Check if the value is an array filled.
 ```typescript
 import { isArrayFilled } from '@drpiou/ts-utils';
 
-isArrayFilled('');
+isArrayFilled([]);
 // => false
 
 isArrayFilled(['']);
@@ -1026,7 +1026,7 @@ isDate(new Date());
 
 #### `isDateString`
 
-Check if the value is a date string.
+Check if the value is a date format string.
 
 ```typescript
 import { isDateString } from '@drpiou/ts-utils';
@@ -1035,6 +1035,12 @@ isDateString('');
 // => false
 
 isDateString('2020-02-22');
+// => true
+
+isDateString('2020-02-22T00:00:00Z');
+// => true
+
+isDateString('2020-02-22T00:00:00.000-01:00');
 // => true
 ```
 
