@@ -1691,6 +1691,6 @@ type Result = PathValue<Test, 'b.c'>;
 #### `PlainObject`
 
 ```typescript
-type Result = PlainObject;
-// => Record<string, any>
+type Result = PlainObject<number>;
+// => Record<string, number>
 ```
