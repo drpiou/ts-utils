@@ -291,7 +291,7 @@ Assert the value is an array filled.
 ```typescript
 import { assertArrayFilled } from '@drpiou/ts-utils';
 
-assertArrayFilled('');
+assertArrayFilled([]);
 // => throw TypeError
 
 assertArrayFilled(['']);

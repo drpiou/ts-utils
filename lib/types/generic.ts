@@ -18,7 +18,7 @@ export type FlattenDeep<T> = T extends any[] ? FlattenDeep<T[number]> : T;
 
 export type Index = keyof any;
 
-export type PlainObject = Record<string, any>;
+export type PlainObject<T = any> = Record<string, T>;
 
 // TODO:
 //  replace with utility-types/DeepRequired
