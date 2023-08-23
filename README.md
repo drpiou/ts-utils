@@ -291,7 +291,7 @@ Assert the value is an array filled.
 ```typescript
 import { assertArrayFilled } from '@drpiou/ts-utils';
 
-assertArrayFilled('');
+assertArrayFilled([]);
 // => throw TypeError
 
 assertArrayFilled(['']);
@@ -1691,6 +1691,6 @@ type Result = PathValue<Test, 'b.c'>;
 #### `PlainObject`
 
 ```typescript
-type Result = PlainObject;
-// => Record<string, any>
+type Result = PlainObject<number>;
+// => Record<string, number>
 ```

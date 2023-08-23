@@ -4,7 +4,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended'],
+  extends: ['eslint:recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -13,7 +13,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     indent: ['off'], // To let prettier do its job
     quotes: ['error', 'single', { avoidEscape: true }],
@@ -22,16 +22,10 @@ module.exports = {
     'no-console': 'warn',
     'no-extra-semi': 'error',
     'no-return-await': 'error',
-    // 'no-unused-vars': ['warn'],
+    'no-unused-vars': ['warn'],
     'prettier/prettier': 'error',
-    'react/jsx-indent': ['error', 2, { checkAttributes: false, indentLogicalExpressions: false }],
-    'react/jsx-no-bind': ['warn'],
   },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
+  settings: {},
   ignorePatterns: ['dist/**/*'],
   overrides: [
     {
@@ -53,11 +47,11 @@ module.exports = {
       rules: {
         'no-shadow': 'off', // Must set to false according to @typescript-eslint/no-shadow
         '@typescript-eslint/adjacent-overload-signatures': ['warn'],
-        // '@typescript-eslint/explicit-function-return-type': ['error'],
-        '@typescript-eslint/explicit-module-boundary-types': ['error'],
+        '@typescript-eslint/explicit-function-return-type': ['warn'],
+        '@typescript-eslint/explicit-module-boundary-types': ['warn'],
         '@typescript-eslint/no-invalid-void-type': ['warn'],
         '@typescript-eslint/no-shadow': ['error'],
-        // '@typescript-eslint/no-unused-vars': ['warn'],
+        '@typescript-eslint/no-unused-vars': ['warn'],
       },
     },
   ],
